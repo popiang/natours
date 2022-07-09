@@ -1,13 +1,13 @@
-50 - Setting up Express and Basic Routing
+# 50 - Setting up Express and Basic Routing
 
 1. create package.json files
-# npm init
+- npm init
 
 2. install express
-# npm installl express@4 (to install version 4.0)
+- npm installl express@4 (to install version 4.0)
 
 3. create app.js file
-# it's a convention to have all of express configurations in app.js file
+- it's a convention to have all of express configurations in app.js file
 
 4. require express, create app, then run app.listen, then create a basic route
 
@@ -16,3 +16,13 @@
 6. then try send back response in json format
 
 7. test route using post
+
+# 52 - Starting Our API: Handling GET Request
+
+1. get the tours data from the file using fs, then use **JSON to parse it** and put it in a variable
+- top level code is only executed once, so put the code to fetch the data above the route
+
+2. create a route for the api and return the tours in json format
+- return status, results count & the datad
+
+3. test using postman
