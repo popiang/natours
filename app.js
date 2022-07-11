@@ -8,17 +8,7 @@ const app = express();
 // data from body is added into req object
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//     res.status(200).json({
-//         message: 'Hello from the server side!',
-//         app: 'Natours',
-//     });
-// });
-
-// app.post('/', (req, res) => {
-// 	res.send('You can post to this endpoint..');
-// });
-
+// get all the tours from file
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-sample.json`));
 
 app.get('/api/v1/tours', (req, res) => {
@@ -73,6 +63,30 @@ app.post('/api/v1/tours', (req, res) => {
 			}
 		})
 	});
+});
+
+app.patch('/api/v1/tours/:id', (req, res) => {
+
+	// convert id in string to integer
+    const id = req.params.id * 1;
+
+    // get the tour
+    const tour = tours.find((el) => el.id === id);
+
+    // check if tour exist
+    if (!tour) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'Invalid ID',
+        });
+    }
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tour: '<updated tour here>',
+        },
+    });
 });
 
 const port = 3000;

@@ -62,3 +62,12 @@
 5. get the id from req.params, then get the tour from tours array and then return in in response
 
 6. add checking for invalid id and send proper response
+
+# 55 - Handling Patch Requests
+
+- will use http method patch instead of put
+
+1. create the route with the http method patch, return proper response, put some checking
+
+2. the rest of the process is not implemented until we have come to mongodb
+
