@@ -86,3 +86,15 @@
 
 3. make it even better by using app.route 
 - app.route('/api/v1/tours').get(getAllTours)
+
+# 59 - Creating Our Own Middleware
+
+1. create middleware using app.use(), add the third parameter next
+
+2. call the next() function once done to pass the flow to the next process
+
+3. the order of middlewares are very important
+
+4. global middlewares are normally defined before the routings
+
+5. create a second custom middleware and add requestTime entry into the req object : req.requestTime = new Date().toISOString();, and put the entry into response object to check

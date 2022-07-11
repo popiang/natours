@@ -8,12 +8,25 @@ const app = express();
 // data from body is added into req object
 app.use(express.json());
 
+// custom middleware
+app.use((req, res, next) => {
+	console.log('Hello from the middleware 💥');
+	next();
+});
+
+app.use((req, res, next) => {
+	req.requesTime = new Date().toISOString();
+	next();
+});
+
 // get all the tours from file
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-sample.json`));
 
 const getAllTours = (req, res) => {
+	console.log(req.requesTime);
     res.status(200).json({
         status: 'success',
+		requestedAt: req.requesTime,
         results: tours.length,
         data: {
             tours: tours,
