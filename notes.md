@@ -71,3 +71,9 @@
 
 2. the rest of the process is not implemented until we have come to mongodb
 
+# 56 - Handling Delete Requests
+
+1. create the route with the http method delete, put some checking and return proper response with status code 204
+
+2. the rest of the process is not implemented until we have come to mongodb
+
