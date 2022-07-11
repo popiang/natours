@@ -42,3 +42,23 @@
 - write to file using writeFile because it is executed in a callback, so we don't want to block other code execution
 - use JSON.stringify to change javascript object to json format
 - send response to client with 201(created) status
+
+# 54 - Responding to URL Parameters
+
+1. create a route with an id parameter in the url:
+- '/api/v1/tours/:id'
+
+2. the parameters are available in req.params object
+
+3. can add multiple params:
+- '/api/v1/tours/:id/:x/:y'
+- but now it will make it compulsory to send the parameters
+- we can make it optional:
+	- '/api/v1/tours/:id/:x/:y?'
+	- parameter y is now optional
+
+4. req.params values are in string format, so need to convert it proper format before using it
+
+5. get the id from req.params, then get the tour from tours array and then return in in response
+
+6. add checking for invalid id and send proper response

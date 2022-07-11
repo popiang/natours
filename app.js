@@ -31,6 +31,31 @@ app.get('/api/v1/tours', (req, res) => {
 	})
 });
 
+app.get('/api/v1/tours/:id', (req, res) => {
+
+	// convert id in string to integer
+	const id = req.params.id * 1;
+
+	// get the tour
+	const tour = tours.find((el) => el.id === id);
+
+	// check if tour exist
+	if (!tour) {
+		return res.status(400).json({
+			status: 'fail',
+			message: 'Invalid ID'
+		});
+	}
+
+	// send the response
+    res.status(200).json({
+        status: 'success',
+		data: {
+			tour
+		}
+    });
+});
+
 app.post('/api/v1/tours', (req, res) => {
 
 	// to create new id
