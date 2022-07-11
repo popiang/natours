@@ -16,7 +16,6 @@
         ],
         "startDates": ["2021-04-25,10:00", "2021-07-20,10:00", "2021-10-05,10:00"]
     },
-
     {
         "id": 1,
         "name": "The Sea Explorer",
@@ -34,7 +33,6 @@
         ],
         "startDates": ["2021-06-19,10:00", "2021-07-20,10:00", "2021-08-18,10:00"]
     },
-
     {
         "id": 2,
         "name": "The Snow Adventurer",
@@ -52,7 +50,6 @@
         ],
         "startDates": ["2022-01-05,10:00", "2022-02-12,10:00", "2023-01-06,10:00"]
     },
-
     {
         "id": 3,
         "name": "The City Wanderer",
@@ -149,5 +146,14 @@
             "tour-9-1.jpg", "tour-9-2.jpg", "tour-9-3.jpg"
         ],
         "startDates": ["2021-12-16,10:00", "2022-01-16,10:00", "2022-12-12,10:00"]
+    }, {
+        "id": 9,
+        "name": "Test Tour 3",
+        "duration": 3,
+        "maxGroupSize": 3,
+        "difficulty": "difficult",
+        "price": 3,
+        "summary": "Test tour 3",
+        "imageCover": "tour-3-cover.jpg"
     }
 ]

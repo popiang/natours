@@ -26,3 +26,19 @@
 - return status, results count & the datad
 
 3. test using postman
+
+# 53 - Handling POST Request
+
+- data is sent to server from client to req var
+- out of the box, express doesn't put that body data in req var, we have to use middleware
+
+1. add middleware before the route to add the data from the data body to req object
+- app.use(express.json())
+
+2. create a route for post request to send data to server
+- create new id
+- create new tour object
+- push new tour to tours array
+- write to file using writeFile because it is executed in a callback, so we don't want to block other code execution
+- use JSON.stringify to change javascript object to json format
+- send response to client with 201(created) status
