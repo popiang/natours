@@ -108,3 +108,9 @@
 3. add morgan as middleware:
 - app.use(morgan('dev'))
 
+# 61 - Implementing The Users Routes
+
+1. create the route for users for all related http methods
+
+2. create all the route handlers
+
