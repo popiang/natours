@@ -77,3 +77,12 @@
 
 2. the rest of the process is not implemented until we have come to mongodb
 
+# 57 - Refactoring Routings
+
+1. export handler functions into their own functions
+
+2. call the handler functions in the respective routes
+- app.get('/api/v1/tours', getAllTours)
+
+3. make it even better by using app.route 
+- app.route('/api/v1/tours').get(getAllTours)

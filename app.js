@@ -11,17 +11,17 @@ app.use(express.json());
 // get all the tours from file
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-sample.json`));
 
-app.get('/api/v1/tours', (req, res) => {
-	res.status(200).json({
-		status: 'success',
-		results: tours.length,
-		data: {
-			tours: tours
-		}
-	})
-});
+const getAllTours = (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        results: tours.length,
+        data: {
+            tours: tours,
+        },
+    });
+};
 
-app.get('/api/v1/tours/:id', (req, res) => {
+const getTour = (req, res) => {
 
 	// convert id in string to integer
 	const id = req.params.id * 1;
@@ -44,9 +44,9 @@ app.get('/api/v1/tours/:id', (req, res) => {
 			tour
 		}
     });
-});
+};
 
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
 
 	// to create new id
 	const newId = tours[tours.length - 1].id + 1;
@@ -63,9 +63,9 @@ app.post('/api/v1/tours', (req, res) => {
 			}
 		})
 	});
-});
+}
 
-app.patch('/api/v1/tours/:id', (req, res) => {
+const updateTour = (req, res) => {
 
 	// convert id in string to integer
     const id = req.params.id * 1;
@@ -87,9 +87,9 @@ app.patch('/api/v1/tours/:id', (req, res) => {
             tour: '<updated tour here>',
         },
     });
-});
+};
 
-app.delete('/api/v1/tours/:id', (req, res) => {
+const deleteTour = (req, res) => {
     
 	// convert id in string to integer
     const id = req.params.id * 1;
@@ -109,7 +109,22 @@ app.delete('/api/v1/tours/:id', (req, res) => {
 		status: 'success',
 		data: null
 	})
-});
+};
+
+// app.get('/api/v1/tours', getAllTours);
+// app.get('/api/v1/tours/:id', getTour);
+// app.post('/api/v1/tours', createTour);
+// app.patch('/api/v1/tours/:id', updateTour);
+// app.delete('/api/v1/tours/:id', deleteTour);
+
+app.route('/api/v1/tours')
+	.get(getAllTours)
+	.post(createTour);
+
+app.route('/api/v1/tours/:id')
+	.get(getTour)
+	.patch(updateTour)
+	.delete(deleteTour);
 
 const port = 3000;
 app.listen(port, () => {
