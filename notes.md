@@ -98,3 +98,13 @@
 4. global middlewares are normally defined before the routings
 
 5. create a second custom middleware and add requestTime entry into the req object : req.requestTime = new Date().toISOString();, and put the entry into response object to check
+
+# 60 - Using 3rd Party Middleware
+
+1. npm install morgan
+
+2. require morgan
+
+3. add morgan as middleware:
+- app.use(morgan('dev'))
+

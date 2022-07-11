@@ -1,9 +1,14 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 
-// this is a middleware
+// 1) MIDDLEWARE
+
+// HTTP request logger middleware for node.js
+app.use(morgan('dev'));
+
 // to modify the incoming req data
 // data from body is added into req object
 app.use(express.json());
@@ -18,6 +23,8 @@ app.use((req, res, next) => {
 	req.requesTime = new Date().toISOString();
 	next();
 });
+
+// 2) ROUTE HANDLERS
 
 // get all the tours from file
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-sample.json`));
@@ -124,6 +131,8 @@ const deleteTour = (req, res) => {
 	})
 };
 
+// 3) ROUTES
+
 // app.get('/api/v1/tours', getAllTours);
 // app.get('/api/v1/tours/:id', getTour);
 // app.post('/api/v1/tours', createTour);
@@ -138,6 +147,8 @@ app.route('/api/v1/tours/:id')
 	.get(getTour)
 	.patch(updateTour)
 	.delete(deleteTour);
+
+// 4) START THE SERVER
 
 const port = 3000;
 app.listen(port, () => {
