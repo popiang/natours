@@ -121,3 +121,32 @@
 2. mount the routers as middleware with the root api url
 
 3. update the router urls accordingly
+
+# 63 - A Better File Structure
+
+- we create different routers for each resource (tour & user) so that we can have a nice seperation of concern between these resource
+- app.js is mainly used for middleware declaration
+- tourRouter & userRouter are considered middleware to handle api calls based on the urls
+- it's a good practice to have everything related to server in server.js file and everything related to express in app.js file
+- server.js will be our starting file
+
+1. create routes folder and in there create tourRoutes.js file and userRoutes.js file
+
+2. move tour routers and handlers into tourRoutes.js file and export the router
+
+3. move user routers and handlers into userRoutes.js file and export the router
+
+4. import the router for tour and user in app.js file
+
+5. then create a controller foler and in there create tourController.js file and userController.js file
+
+6. move all handlers function from tourRoutes.js & userRoutes.js into tourController.js & userController.js
+
+7. export all the handler functions
+
+8. import the controllers into the routes files
+
+9. create server.js file and move code to run the app into it
+
+10. export app from app.js file and import into server.js
+
