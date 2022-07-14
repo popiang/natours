@@ -114,3 +114,10 @@
 
 2. create all the route handlers
 
+# 62 - Creating And Mouting Multiple Routers
+
+1. create routers for tours & users using express.Router()
+
+2. mount the routers as middleware with the root api url
+
+3. update the router urls accordingly
