@@ -186,3 +186,24 @@
 - solution: built-in express middleware
 	- app.use(express.static(`${__dirname}/public`));
 	- call this middleware in app.js
+
+# 67 - Environment Variables
+
+- we set the environment variables outside of app.js(only related to express)
+- in server.js, add console.log(app.get('env')) to see the environment we are currently in
+- inv variables are global variables that are used to define the variables in which the node app is running
+- env variables is set by express, but node.js also set a lot of env variables
+- to start environment in development:
+	- in terminal: NODE_ENV=development nodemon server.js
+	- other information can also be set in the server starting up command:
+		- NODE_ENV=development X=23 nodemon server.js
+- but the good practice is to set all the relevant information during server start up in the config.env file
+- create it in the root folder and set the relevant information in it
+- to make express can read the config file, we use npm package dotenv
+	- install it and require it in the server.js file
+- when we start the server, the config.env file will be read and the variables in the file will be stored in node.js environment variables
+- once the variables are in node.js environment, it can be used set only to run certain middleware depanding on the variables value:
+	- logging is to run only on development environment
+	- so in the app.js file, only execute the logging middleware when process.env.NODE_ENV === 'development'
+	- the port number is now also set using process.env variables
+	

@@ -9,12 +9,15 @@ const app = express();
 // 1) MIDDLEWARE
 
 // HTTP request logger middleware for node.js
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
+}
 
 // to modify the incoming req data
 // data from body is added into req object
 app.use(express.json());
 
+// set the static files using express built-in middleware
 app.use(express.static(`${__dirname}/public`));
 
 // custom middleware
