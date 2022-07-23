@@ -10,7 +10,7 @@ const app = express();
 
 // HTTP request logger middleware for node.js
 if (process.env.NODE_ENV === 'development') {
-	app.use(morgan('dev'));
+    app.use(morgan('dev'));
 }
 
 // to modify the incoming req data
@@ -22,16 +22,15 @@ app.use(express.static(`${__dirname}/public`));
 
 // custom middleware
 app.use((req, res, next) => {
-	console.log('Hello from the middleware 💥');
-	next();
+    // eslint-disable-next-line no-console
+    console.log('Hello from the middleware 💥');
+    next();
 });
 
 app.use((req, res, next) => {
-	req.requesTime = new Date().toISOString();
-	next();
+    req.requesTime = new Date().toISOString();
+    next();
 });
-
-// 2) ROUTES
 
 // mounting the routers
 app.use('/api/v1/tours', tourRouter);
