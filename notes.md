@@ -206,4 +206,11 @@
 	- logging is to run only on development environment
 	- so in the app.js file, only execute the logging middleware when process.env.NODE_ENV === 'development'
 	- the port number is now also set using process.env variables
-	
+
+# 68 - Prettier & ESLint
+
+- Prettier is code formatter
+- ESLint is to check coding syntax
+- install both in VSCode extension
+- then install this in the terminal:
+	npm i eslint@5.16.0 prettier@1.17.0 eslint-config-prettier@4.1.0 eslint-plugin-prettier@3.0.1 eslint-config-airbnb@17.1.0 eslint-plugin-node@8.0.1 eslint-plugin-import@2.17.2 eslint-plugin-jsx-a11y@6.2.1 eslint-plugin-react@7.12.4 --save-dev
