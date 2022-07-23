@@ -3,6 +3,28 @@ const fs = require('fs');
 // get all the tours from file
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-sample.json`));
 
+exports.checkID = (req, res, next, val) => {
+
+	console.log(`Tour id to check: ${val}`);
+
+	// convert id in string to integer
+    // const id = req.params.id * 1;
+    const id = val * 1;
+
+    // get the tour
+    const tour = tours.find((el) => el.id === id);
+
+    // check if tour exist
+    if (!tour) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'Invalid ID',
+        });
+    }
+
+	next();
+}
+
 exports.getAllTours = (req, res) => {
     console.log(req.requesTime);
     res.status(200).json({
@@ -16,19 +38,12 @@ exports.getAllTours = (req, res) => {
 };
 
 exports.getTour = (req, res) => {
-    // convert id in string to integer
+
+	// convert id in string to integer
     const id = req.params.id * 1;
 
     // get the tour
     const tour = tours.find((el) => el.id === id);
-
-    // check if tour exist
-    if (!tour) {
-        return res.status(400).json({
-            status: 'fail',
-            message: 'Invalid ID',
-        });
-    }
 
     // send the response
     res.status(200).json({
@@ -62,20 +77,6 @@ exports.createTour = (req, res) => {
 };
 
 exports.updateTour = (req, res) => {
-    // convert id in string to integer
-    const id = req.params.id * 1;
-
-    // get the tour
-    const tour = tours.find((el) => el.id === id);
-
-    // check if tour exist
-    if (!tour) {
-        return res.status(400).json({
-            status: 'fail',
-            message: 'Invalid ID',
-        });
-    }
-
     res.status(200).json({
         status: 'success',
         data: {
@@ -85,20 +86,6 @@ exports.updateTour = (req, res) => {
 };
 
 exports.deleteTour = (req, res) => {
-    // convert id in string to integer
-    const id = req.params.id * 1;
-
-    // get the tour
-    const tour = tours.find((el) => el.id === id);
-
-    // check if tour exist
-    if (!tour) {
-        return res.status(400).json({
-            status: 'fail',
-            message: 'Invalid ID',
-        });
-    }
-
     res.status(204).json({
         status: 'success',
         data: null,

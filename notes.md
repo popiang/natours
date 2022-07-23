@@ -150,3 +150,16 @@
 
 10. export app from app.js file and import into server.js
 
+# 64 - Param Middleware
+
+- param middleware is a middleware that only runs for certain parameters in our URL
+- it has fourth parameter = val, the value of the param
+- to test, create one param middleware in tourRoutes.js file, specify the fourth parameter, console.log out the val see the param value and don't forget to and next() function at the end
+- it can be used to validate the tour id:
+1. in tour controller, create checkID function to check ID
+2. the function is param middleware function, so it has the fourth param which is the id
+3. in the function do the checking:
+	a. return error response if tour id is not exist
+	b. call the next function if tour id exist
+4. remove the id checking in all other functions in the tour controller
+5. call this checkID function in tourRoutes file in the param.middleware
