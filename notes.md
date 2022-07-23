@@ -178,3 +178,11 @@
 3. export this middleware function
 4. call it in the tourRoutes page, in the tour router before the function to create the tour
 
+# 66 - Serving Static Files
+
+- static files are basically files in the system that can't be access through router
+- eg: files in the public folder
+	- no routers are associated with the files in this folder
+- solution: built-in express middleware
+	- app.use(express.static(`${__dirname}/public`));
+	- call this middleware in app.js
