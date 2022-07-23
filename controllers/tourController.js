@@ -5,10 +5,7 @@ const tours = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-sa
 
 exports.checkID = (req, res, next, val) => {
 
-	console.log(`Tour id to check: ${val}`);
-
 	// convert id in string to integer
-    // const id = req.params.id * 1;
     const id = val * 1;
 
     // get the tour
@@ -22,6 +19,16 @@ exports.checkID = (req, res, next, val) => {
         });
     }
 
+	next();
+}
+
+exports.checkBody = (req, res, next) => {
+	if (!req.body.name || !req.body.price) {
+		return res.status(400).json({
+			status: 'fail',
+			message: 'Tour name and price are compulsory'
+		});
+	}
 	next();
 }
 
@@ -63,7 +70,7 @@ exports.createTour = (req, res) => {
 
     tours.push(newTour);
     fs.writeFile(
-        `${__dirname}/dev-data/data/tours-sample.json`,
+        `${__dirname}/../dev-data/data/tours-sample.json`,
         JSON.stringify(tours),
         (err) => {
             res.status(201).json({

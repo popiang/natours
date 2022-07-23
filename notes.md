@@ -163,3 +163,18 @@
 	b. call the next function if tour id exist
 4. remove the id checking in all other functions in the tour controller
 5. call this checkID function in tourRoutes file in the param.middleware
+
+
+# 65 - Chaining Multiple Middleware Functions
+
+- middleware functions can be chained in the router
+- simply create a new middleware function in the controller, export it, and call it before or after any middleware function in the router
+* remember, a middleware function must have the next parameter!!!
+
+1. create a checkBody middleware function in tour controller to check for compulsory data, name & price, in the req body
+2. do the checking in the function:
+- return 400 status with error message if name & price are not available in the req.body
+- call next function in both required data are available
+3. export this middleware function
+4. call it in the tourRoutes page, in the tour router before the function to create the tour
+
