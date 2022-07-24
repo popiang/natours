@@ -239,3 +239,10 @@
 2. set the name of the field & datatype
 3. we can also set schema type options to set more options for the field like required, default value & unique
 4. once the schema is complete, create the Tour model using this schema using mongoose.model()
+
+# 86 - Creating Documents And Testing The Model
+
+- create a new tour using the above Tour model, set te name, rating & price
+- run save() on the new tour object, and handle the returned promise, and also handle any possible error through catch
+- execute server.js to save the document in the mongodb
+
