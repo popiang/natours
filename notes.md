@@ -189,9 +189,9 @@
 
 # 67 - Environment Variables
 
-- we set the environment variables outside of app.js(only related to express)
+- we set the environment variables outside of app.js(in appjs only related to express)
 - in server.js, add console.log(app.get('env')) to see the environment we are currently in
-- inv variables are global variables that are used to define the variables in which the node app is running
+- env variables are global variables that are used to define the variables in which the node app is running
 - env variables is set by express, but node.js also set a lot of env variables
 - to start environment in development:
 	- in terminal: NODE_ENV=development nodemon server.js
