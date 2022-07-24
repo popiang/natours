@@ -228,3 +228,14 @@
 - above function call return a promise, handle it and console log the connection properties to verify the connection
 
 
+# 85 - Creating A Simple Tour Model 
+
+- mongoose is all about model
+- model is like a class in javascript, like a blueprint to create document, and also to query, update & delete document
+- to create a model, we need a schema
+- schema is describe our data, to set default value, to validate, etc..
+
+1. create schema in server.js using mongoose.Schema()
+2. set the name of the field & datatype
+3. we can also set schema type options to set more options for the field like required, default value & unique
+4. once the schema is complete, create the Tour model using this schema using mongoose.model()
