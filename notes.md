@@ -254,4 +254,13 @@
 - export the tour model
 - in tour controller, remove everything that related to tour data retreived from the file
 
+# 89 - Another Way Of Creating Documents
+
+- use Tour.create({})
+- handle the return promise using async await
+	- if eslint produce error message on the node version, simply update package.json file on the node version
+- send response as usual for successful document creation
+- handle error by using try catch block for the whole code for async await
+- don't forget the Tour.create(req.body)
+- test using postman
 
