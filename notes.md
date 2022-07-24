@@ -214,3 +214,17 @@
 - install both in VSCode extension
 - then install this in the terminal:
 	npm i eslint@5.16.0 prettier@1.17.0 eslint-config-prettier@4.1.0 eslint-plugin-prettier@3.0.1 eslint-config-airbnb@17.1.0 eslint-plugin-node@8.0.1 eslint-plugin-import@2.17.2 eslint-plugin-jsx-a11y@6.2.1 eslint-plugin-react@7.12.4 --save-dev
+
+//////////////////////////////////////////////////////////////////////////
+
+# 83 - Connecting Our DB With The Express App
+
+- create a database and collection in mongodb atlas
+- create user and password
+- in the config.env put the database connection string and database password
+- install npm package mongoose and require it in server.js
+- get the db connection string from env and replace the password in the string
+- call mongoose.connect and put in the connectin string as arguments, along with some default option values
+- above function call return a promise, handle it and console log the connection properties to verify the connection
+
+
