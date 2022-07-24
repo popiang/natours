@@ -246,3 +246,12 @@
 - run save() on the new tour object, and handle the returned promise, and also handle any possible error through catch
 - execute server.js to save the document in the mongodb
 
+# 88 - Refactoring For MVC
+
+- create models folder
+- create tourModel.js file
+- move tour schema declaration and tour model declaration into tourModel.js file
+- export the tour model
+- in tour controller, remove everything that related to tour data retreived from the file
+
+
