@@ -264,3 +264,18 @@
 - don't forget the Tour.create(req.body)
 - test using postman
 
+# 90 - Reading Documents
+
+* getAlltours
+- use Tour.find() to get all the tours 
+- it returns a promise, so use async await
+- set the response as usual
+- set try catch block and set the standard response for error
+- test using postman to get all tours
+
+* getTour
+- use Tour.findById(req.params.id)
+- everything else is the same with above
+- test with postman, send along the id
+
+

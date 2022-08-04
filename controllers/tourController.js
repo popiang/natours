@@ -7,31 +7,42 @@ const Tour = require('../models/tourModel');
 //     fs.readFileSync(`${__dirname}/../dev-data/data/tours-sample.json`)
 // );
 
-exports.getAllTours = (req, res) => {
-    res.status(200).json({
-        status: 'success',
-        requestedAt: req.requesTime
-        // results: tours.length,
-        // data: {
-        //     tours: tours
-        // }
-    });
+exports.getAllTours = async (req, res) => {
+    try {
+        const tours = await Tour.find();
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                results: tours.length,
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
 };
 
-exports.getTour = (req, res) => {
-    // convert id in string to integer
-    // const id = req.params.id * 1;
+exports.getTour = async (req, res) => {
+    try {
+        const tour = await Tour.findById(req.params.id);
 
-    // get the tour
-    // const tour = tours.find(el => el.id === id);
-
-    // send the response
-    res.status(200).json({
-        status: 'success'
-        // data: {
-        //     tour
-        // }
-    });
+        // send the response
+        res.status(200).json({
+            status: 'success',
+            data: {
+                tour
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'failed',
+            message: error
+        });
+    }
 };
 
 exports.createTour = async (req, res) => {
