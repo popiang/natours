@@ -279,3 +279,18 @@
 - test with postman, send along the id
 
 
+# 91 - Updating Documents
+
+* updateTour
+- use Tour.findByIdAndUpdate()
+- parameter, the id, the updated body and some options
+	- new: true = return the updated tour
+	- runValidators: true = validate the input
+- it returns a promise, so use async await
+- set the response as usual
+- set try catch block and set the standard response for error
+- test using postman for correct data
+- test using postman for incorrect data to test the runValidators option
+
+
+
