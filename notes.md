@@ -302,6 +302,12 @@
 - handle error accordingly
 - test with postman
 
+# 93 - Modelling The Tours
+
+- complete the tour model with all the attributes will all the type and other information
+- use jonas completed project as reference of all the attributes
+- once done, try adding a tour using data from the tours-sample.json file using postman
+
 
 
 
