@@ -292,5 +292,17 @@
 - test using postman for correct data
 - test using postman for incorrect data to test the runValidators option
 
+# 92 - Deleting Documents
+
+* deleteTour
+- use Tour.findByIdAndDelete()
+- parameter req.params.id
+- use async await
+- use try catch
+- handle error accordingly
+- test with postman
+
+
+
 
 
