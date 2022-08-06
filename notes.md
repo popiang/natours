@@ -308,7 +308,27 @@
 - use jonas completed project as reference of all the attributes
 - once done, try adding a tour using data from the tours-sample.json file using postman
 
+# 94 - Importing Development Data
 
+- create a seperate script, inside data folder, to just import the data from the file into the database table
+- require all the required components
+- set the config file path
+- set the database string
+- create to database using mongoose
+- read the tours from the file using fs and parse it into tours variable
+- create importData function:
+	- use async await, try catch
+	- use Tour.create(tours)
+	- process.exit() once done
+- create deleteData function:
+	- use async await, try catch
+	- use Tour.deleteMany()
+	- process.exit() once done
+- use process argument variables to execute the script using command line:
+	- add --delete or --import at the end of the node execution command
+	- get the added argument variable, process.argv[2]
+	- based on it execute either deleteData or importData function
+- verify using postman
 
 
 

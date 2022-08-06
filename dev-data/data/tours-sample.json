@@ -205,20 +205,5 @@
 			"2022-01-16,10:00",
 			"2022-12-12,10:00"
 		]
-	},
-	{
-		"id": 9,
-		"name": "Test Tour 3",
-		"duration": 3,
-		"maxGroupSize": 3,
-		"difficulty": "difficult",
-		"price": 3,
-		"summary": "Test tour 3",
-		"imageCover": "tour-3-cover.jpg"
-	},
-	{
-		"id": 10,
-		"name": "Tour test 11",
-		"price": "10"
 	}
 ]
