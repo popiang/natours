@@ -355,4 +355,18 @@
 	const tours = await query;
 - put comments to indicate all the involved processes
 
+# 96 - Making the API Better - Advanced Filtering
+
+- parameter in the query can also use comparison operator:
+	- gt, gte, lt, lte
+- how: 
+	- eg: duration[gte]=5
+- how reg.query reads it:
+	- { duration: { gte: '5' }, difficulty: 'easy' }
+- but mongoose needs the comparison to be:
+	- { duration: { $gte: '5' }, difficulty: 'easy' }
+- so simply use javascript to append the $ to the comparison operator
+	- refer sample
+- once amended the query string, then send it to the Tour.find()
+- test using postman
 
