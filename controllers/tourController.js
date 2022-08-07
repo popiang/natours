@@ -1,6 +1,5 @@
 // const fs = require('fs');
 
-const { query } = require('express');
 const Tour = require('../models/tourModel');
 
 // get all the tours from file
