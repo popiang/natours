@@ -330,5 +330,29 @@
 	- based on it execute either deleteData or importData function
 - verify using postman
 
+# 95 - Making the API Better - Filtering
+
+* req.query
+- during getAllTours, the API call can include extra parameters in the URL which can be used to query the result 
+- the extra parameters can be fetch from req.query
+	- eg: {duration: '5', difficulty: 'easy'}
+- the query object can be used directly in the Tour.find() because the format happens to be compatible
+- test using postman
+
+* exclude special query params
+- the url of the API call can also include parameters such as page, limit, sort, etc which are not used in tour query, but instead used to managed the result of the query
+- so these parameters must be excluded from the query
+	- make hard copy of the req.query
+	- prepare the arrays of the possible parameters to exclude
+	- use forEach on the array to loop, and delete the element in the hard copy of req.query
+	- send the hard copy of the req.query to the Tour.find()
+- test using postman
+
+* final part
+- when the query is executed in the await part, at that moment it's already to late to apply limit, pagination, sort, etc to the result
+- therefore, the await is pushed a bit further down to execute the final query:
+	const query = Tour.find(queryObj);
+	const tours = await query;
+- put comments to indicate all the involved processes
 
 
