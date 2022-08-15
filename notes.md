@@ -401,3 +401,17 @@
 	- tourModel.js
 		- search for the field and put 'select: false'
 	
+# 99 - Making the API Better - Pagination
+
+- get the page and limit parameters from request object
+- if no page, set the default:
+	const page = req.query.page * 1 || 1
+- if no limit, set the default:
+	const limit = req.query.limit * 1 || 1
+- times 1 to change the format from text to integer
+- get the skip through below formula:
+	const skip = (page - 1) * limit
+- send it to the query:
+	query = query.skip(skip).limit(limit)
+- easy peasy!!!
+

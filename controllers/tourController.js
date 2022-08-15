@@ -32,7 +32,7 @@ exports.getAllTours = async (req, res) => {
             const sortBy = req.query.sort.split(',').join(' ');
             query = query.sort(sortBy);
         } else {
-            query = query.sort('-createdAt');
+            query = query.sort('-_id');
         }
 
         // 4. limit fields
@@ -42,6 +42,13 @@ exports.getAllTours = async (req, res) => {
         } else {
             query = query.select('-__v');
         }
+
+        // 5. pagination
+        const page = req.query.page * 1 || 1;
+        const limit = req.query.limit * 1 || 100;
+        const skip = (page - 1) * limit;
+
+        query = query.skip(skip).limit(limit);
 
         // execute the query
         const tours = await query;
