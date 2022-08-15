@@ -370,3 +370,23 @@
 - once amended the query string, then send it to the Tour.find()
 - test using postman
 
+# 97 - Making the API Better - Sorting
+
+- use the sort parameter from the request(req) object to get the field to sort the result of the query
+- check if the sort parameter is available
+- then do query.sort(req.query.sort)
+- assign the result back to query
+- then send the query to Tour.find()
+- the result will be sort ascending
+- to make the ressult sorting descending, simply add - before the sort parameter value (eg: -price)
+
+- if the first sort has a tie, in the API url simply add the second parameter for sorting, just seperate it with a comma(,)
+- in the code, simply split the sorting parameters with comma, the join them back using space (' ')
+	- it is because that is how sort values are called in mongoose
+	- eg: sort('price ratingsAverage')
+- if the second sorting also needs to be descending, simply add minus(-) just like the first sort parameters
+
+- lastly, add else for the above if block, if no sort parameters are passed, simply sort using createdAt value
+
+
+	
