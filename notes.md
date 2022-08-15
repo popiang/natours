@@ -388,5 +388,16 @@
 
 - lastly, add else for the above if block, if no sort parameters are passed, simply sort using createdAt value
 
+# 98 - Making the API Better - Limiting Fields
 
+- use the fields parameter from the request object
+	- req.query.fields
+- split it by comma, then join them back by ' ' and assign it to fields variable
+- then use the fields in the query.select()
+- set the else for default limiting fields if user doesn't supply any
+	- query.select('-__v'), to exclude the version no from the results
+
+- fields can also be excluded directly in the schema
+	- tourModel.js
+		- search for the field and put 'select: false'
 	
