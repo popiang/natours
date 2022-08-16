@@ -415,3 +415,14 @@
 	query = query.skip(skip).limit(limit)
 - easy peasy!!!
 
+# 100 - Making the API Better - Aliasing
+
+- if we want to create an API that return results according to certain fixed query, meaning with certain limit, certain sort, certain fields, etc.., we can use a technic called aliasing
+- first create a middleware in the controller with all the query and then exports it, don't forget to call the next function
+- use the middleware in the route file
+	- create a new router
+	- give it a specific name, eg '/top-5-cheap'
+	- the call the alias middleware first and then call the getAllTours
+- test in postman, call the api using the router name: 'api/v1/tours/top-5-cheap'
+
+

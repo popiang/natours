@@ -1,17 +1,14 @@
-// const fs = require('fs');
-
 const Tour = require('../models/tourModel');
 
-// get all the tours from file
-// const tours = JSON.parse(
-//     fs.readFileSync(`${__dirname}/../dev-data/data/tours-sample.json`)
-// );
+exports.aliasTopTours = (req, res, next) => {
+    req.query.limit = '5';
+    req.query.sort = '-ratingsAverage,price';
+    req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
+    next();
+};
 
 exports.getAllTours = async (req, res) => {
     try {
-        // eslint-disable-next-line no-console
-        console.log(req.query);
-
         // build the query
         // 1. filtering
         const queryObj = { ...req.query };
@@ -52,12 +49,6 @@ exports.getAllTours = async (req, res) => {
 
         // execute the query
         const tours = await query;
-
-        // const query = Tour.find()
-        //     .where('duration')
-        //     .equals(5)
-        //     .where('difficulty')
-        //     .equals('easy');
 
         // send response
         res.status(200).json({
