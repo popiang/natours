@@ -1,4 +1,5 @@
 const Tour = require('../models/tourModel');
+const APIFeatures = require('../utils/apiFeatures');
 
 exports.aliasTopTours = (req, res, next) => {
     req.query.limit = '5';
@@ -11,44 +12,51 @@ exports.getAllTours = async (req, res) => {
     try {
         // build the query
         // 1. filtering
-        const queryObj = { ...req.query };
-        const excludedFields = ['page', 'sort', 'limit', 'fields'];
-        excludedFields.forEach(el => delete queryObj[el]);
+        // const queryObj = { ...req.query };
+        // const excludedFields = ['page', 'sort', 'limit', 'fields'];
+        // excludedFields.forEach(el => delete queryObj[el]);
 
         // 2. advanced filtering
-        let queryStr = JSON.stringify(queryObj);
-        queryStr = queryStr.replace(
-            /\b(gt|gte|lt|lte)\b/g,
-            match => `$${match}`
-        );
+        // let queryStr = JSON.stringify(queryObj);
+        // queryStr = queryStr.replace(
+        //     /\b(gt|gte|lt|lte)\b/g,
+        //     match => `$${match}`
+        // );
 
-        let query = Tour.find(JSON.parse(queryStr));
+        // let query = Tour.find(JSON.parse(queryStr));
 
         // 3. sort
-        if (req.query.sort) {
-            const sortBy = req.query.sort.split(',').join(' ');
-            query = query.sort(sortBy);
-        } else {
-            query = query.sort('-_id');
-        }
+        // if (req.query.sort) {
+        //     const sortBy = req.query.sort.split(',').join(' ');
+        //     query = query.sort(sortBy);
+        // } else {
+        //     query = query.sort('-_id');
+        // }
 
         // 4. limit fields
-        if (req.query.fields) {
-            const fields = req.query.fields.split(',').join(' ');
-            query = query.select(fields);
-        } else {
-            query = query.select('-__v');
-        }
+        // if (req.query.fields) {
+        //     const fields = req.query.fields.split(',').join(' ');
+        //     query = query.select(fields);
+        // } else {
+        //     query = query.select('-__v');
+        // }
 
         // 5. pagination
-        const page = req.query.page * 1 || 1;
-        const limit = req.query.limit * 1 || 100;
-        const skip = (page - 1) * limit;
+        // const page = req.query.page * 1 || 1;
+        // const limit = req.query.limit * 1 || 100;
+        // const skip = (page - 1) * limit;
 
-        query = query.skip(skip).limit(limit);
+        // query = query.skip(skip).limit(limit);
 
         // execute the query
-        const tours = await query;
+        const features = new APIFeatures(Tour.find(), req.query)
+            .filter()
+            .sort()
+            .limitFields()
+            .paginate();
+        const tours = await features.query;
+
+        // const tours = await query;
 
         // send response
         res.status(200).json({

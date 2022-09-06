@@ -425,4 +425,13 @@
 	- the call the alias middleware first and then call the getAllTours
 - test in postman, call the api using the router name: 'api/v1/tours/top-5-cheap'
 
+# 101 - Refactoring API features
 
+- create new object of API features class
+- the object receive query object and query string that's coming from express
+-  in each method, we manipulate the query, keep adding staff to the query
+- each method will return this(the object it self) so we can do method chaining
+- the object is assigned to variable features
+- all the methods are called during the assignment
+- in the end we await the result
+- the result in assign to variable tours
