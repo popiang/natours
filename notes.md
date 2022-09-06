@@ -435,3 +435,25 @@
 - all the methods are called during the assignment
 - in the end we await the result
 - the result in assign to variable tours
+
+# 102 - Aggregation Pipeline: Matching and Grouping
+
+- extremely powerfull and usefull mongodb framework for data aggregation
+- define a pipeline that all the documents from a certain collections to go through where they are processed step by step in order to transform them into aggregated results
+- example: everage, min, max, distance
+
+- create getTourStats in tourController
+  - standard async await function with req and res
+  - use Tour.aggregate
+  - inside Tour.aggregate([]), define the aggregate stages that we want
+	- $match:
+	  - ratingsAverage
+	- $group: 
+	  - _id, numTours, numRatings, avgRating, avgPrice, minPrice, maxPrice
+	- $sort:
+	  - avgPrice
+	- can find the stages in mongodb website
+	- in each stage use mongodb operator to get the result:
+		- $avg, $min, $max
+  - return the result to a variable
+  - return the variable in the response as usual
