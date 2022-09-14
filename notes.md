@@ -448,7 +448,7 @@
   - inside Tour.aggregate([]), define the aggregate stages that we want
 	- $match:
 	  - ratingsAverage
-	- $group: 
+	- $group:	   
 	  - _id, numTours, numRatings, avgRating, avgPrice, minPrice, maxPrice
 	- $sort:
 	  - avgPrice
