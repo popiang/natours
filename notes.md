@@ -471,3 +471,15 @@
 - $addFields:
 	- to add new key value in the result
 	- $addFields: { month: '$_id' }
+
+# 104 - Virtual Properties
+
+- fields that can be defined in our schema but won't be persisted
+- how to create:
+	- tourSchema.virtual('durationWeeks').get(function() {
+		return this.duration / 7;
+	})
+	- durationWeeks is the virtual properties
+	- in the schema, set the option for toJSON and toObject as virtuals: true
+- try run by postman and the virtual properties should be visible
+
