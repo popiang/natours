@@ -457,3 +457,17 @@
 		- $avg, $min, $max
   - return the result to a variable
   - return the variable in the response as usual
+
+# 103 - Aggregation Pipeline: Unwinding and Projecting
+
+- basically almost the same like above the whole setup
+- unwinding by the startDate:
+	- meaning creating a copy of the document for each date in the document
+	- if in one document got 3 startDate, then 3 same documents will be created for each startDate
+	- use $unwind
+- projecting is controlling what value to display in the result:
+	- if _id: 0, then it will not be displayed
+	- use $project
+- $addFields:
+	- to add new key value in the result
+	- $addFields: { month: '$_id' }
