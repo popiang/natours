@@ -483,3 +483,22 @@
 	- in the schema, set the option for toJSON and toObject as virtuals: true
 - try run by postman and the virtual properties should be visible
 
+# 105 - Document Middleware
+
+- mongoose middleware
+	- to make something happen between 2 events
+	- also called pre or post hook
+	- can define function before or after certain events
+	- 4 types:
+		- document
+		- query
+		- aggregate
+		- module
+	- document middleware:
+		- can act on the currently processed document
+		- define the function hook
+		- define in the schema
+		- example:
+			- tourSchema.pre('save', function(){})
+			- tourSchema.post('save', function(){})
+		- can have multiple middleware
