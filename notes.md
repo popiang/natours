@@ -500,5 +500,12 @@
 		- define in the schema
 		- example:
 			- tourSchema.pre('save', function(){})
+				- next function is available
+				- to call the middleware in the stack
 			- tourSchema.post('save', function(){})
+				- have access to document that has just been saved to db
+				- executed after all the pre middleware are executed
+				- no the this, but have finished document 
 		- can have multiple middleware
+		- hook & middleware : same meaning 
+* any data need to be in the schema to be persisted in db
