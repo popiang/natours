@@ -509,3 +509,15 @@
 		- can have multiple middleware
 		- hook & middleware : same meaning 
 * any data need to be in the schema to be persisted in db
+
+# 106 - Query Middleware
+
+- pre find hook - a mongoose middleware that will run before any find query is executed
+- same with document middleware, the only difference is the find hook, that makes it a query middleware
+- the this keyword now points at the current query, not the current document
+- create a query middleware for both find and findOne hook in one function
+  - use regular expression /^find/ so any hooke that starts with the word find will call this query middleware
+- post middleware: 
+  - have access to all of the documents return by the query
+- create pre and post query middleware and test in postman
+
