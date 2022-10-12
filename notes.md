@@ -530,3 +530,21 @@
 - add pre aggregate middleware to add filter to secretTour for all aggregates
   - this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
   - what it's doing is to add additional stage to filter the result
+
+# 108 - Data Validation: Built-In Validators
+
+- do it in the model
+- mongoose already comes with validation tools out of the box
+- required : in the schema is actually a validator
+- maxlength & minlength
+  - for string length
+  - can add the error message
+  - eg: maxlength: [40, 'the error message']
+- max & min
+  - for length of numbers and date
+  - can add the error message
+  - eg: max: [5, 'the error message']
+- enum
+  - can create a set of values to choose from
+  - can add the error message
+  - eg: enum: {value: ['easy', 'medium'], message: 'the error message'}
