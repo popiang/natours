@@ -521,3 +521,12 @@
   - have access to all of the documents return by the query
 - create pre and post query middleware and test in postman
 
+# 107 - Aggregation Middleware
+
+- allow us to add hook before or after an aggregation happens
+- if we have many aggregations and we want to filter something, instead of inserting the filter in all of the aggregation, it's more efficient to use aggregation middleware (pre), so this a sample use 
+- the pattern is almost the same with other middleware except that it uses 'aggregate' hook
+- the this in aggregation middleware points to the aggregation object
+- add pre aggregate middleware to add filter to secretTour for all aggregates
+  - this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+  - what it's doing is to add additional stage to filter the result
