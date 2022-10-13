@@ -548,3 +548,16 @@
   - can create a set of values to choose from
   - can add the error message
   - eg: enum: {value: ['easy', 'medium'], message: 'the error message'}
+
+  # 109 - Data Validation: Custom Validators
+
+  - custom validators are simply functions that return true or false
+  - use the keyword 'validate'
+  - validate is assigned a function
+  - the function received the value of the field as it's parameter
+  - inside the function we can put the required logic and return either true or false
+  - if want to add error message, use curley braces for the validate, inside have validator for the function and message for the error message
+  - can use ({VALUE}) to display the value of the field in the error message
+  - use custom validators to validate that priceDiscount is smaller then the price
+  - this in the function only points to NEW document, meaning not working on update
+  - there is also validator library, called 'validator', can be downloaded using npm, please check documentation for details
