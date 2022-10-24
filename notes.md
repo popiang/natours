@@ -561,3 +561,12 @@
   - use custom validators to validate that priceDiscount is smaller then the price
   - this in the function only points to NEW document, meaning not working on update
   - there is also validator library, called 'validator', can be downloaded using npm, please check documentation for details
+
+# 111 - Debugging Node.js with ndb
+
+- run: sudo npm install ndb --save-dev
+- create script in package.json
+	- "debug": "ndb server.js"
+- run the script:
+	- sudo npm run debug
+- we can use ndb to run debugger
