@@ -596,3 +596,20 @@
 		- where the error is triggered, call next(err)
 		- when next() has an argument, express will automatically treats it as calling the global error handling middleware
 		- in the err where the error is triggered we normally will set the status, statusCode & message
+
+	# 115 - Better Errors And Refactoring
+
+	- let's refactor the error handlers to make it better
+	- create an AppError class file in utils folder
+		- extends Error
+		- receive message and statusCode
+		- send message to super
+		- set the statusCode, status and isOperational
+		- set Error.captureStackTrace
+		- export the class
+	 - require the class in app.js
+	 - the next function to trigger the error hanlder, send the AppError class object as the arguments
+	 - create errorController file
+	 - move the global error handler function into the errorController file, then export it
+	 - require it in app.js, send the global error handler in the app.use()
+	 - test using postman
