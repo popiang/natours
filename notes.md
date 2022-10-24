@@ -570,3 +570,11 @@
 - run the script:
 	- sudo npm run debug
 - we can use ndb to run debugger
+
+# 112 - Handling Unhandled Routes
+
+- in app js, the logic is, if a request flows past tourRouter and userRouter, it means there's something wrong with the request
+- so the idea is, we put a middleware after tourRouter & userRouter, meaning we will catch this problematic request and then send proper error response
+- use: app.all('*') ---> to catch all type of http methods and verbs
+- in the middle simply response normally for bad request
+
