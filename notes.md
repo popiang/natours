@@ -578,3 +578,21 @@
 - use: app.all('*') ---> to catch all type of http methods and verbs
 - in the middle simply response normally for bad request
 
+# 114 - Implementing A Global Error Handling Middleware
+
+- out of the box express already have a middleware to handle errors
+- we create a global error handling middleware to handle all operational errors, meaning just one middleware to handle all of the errors
+- we use: 
+	- app.use((err, req, res, next) => {})
+	- express automatically knows that this is a error handling middleware
+	- inside err we have:
+		- err.statusCode
+			- set a default if not available
+		- err.status
+			- set a default if not available
+		- err.message
+			- receive from where the error is triggered
+	- how to triggered?
+		- where the error is triggered, call next(err)
+		- when next() has an argument, express will automatically treats it as calling the global error handling middleware
+		- in the err where the error is triggered we normally will set the status, statusCode & message
