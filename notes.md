@@ -641,3 +641,9 @@
 	- remove the try catch and error response code
 - to make it even better, move the catchAsync function to catchAsync file in utils folder, export it, the require it in tourController file
 
+# 117 - Adding 404 Not Found Errors
+
+- for all functions in tourController that query for a tour by using the id, we will return a new Error with a proper message and with a 404 status in the next() function
+- reason being is, if the id sent to the url is valid, but the tour is not exist, express will return success status but with 0 data
+- so we add this piece of code to handle this situation
+- the next function is return, to make sure the flow of the execution immediately return, doesn't go to the next line
