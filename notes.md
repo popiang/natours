@@ -597,19 +597,47 @@
 		- when next() has an argument, express will automatically treats it as calling the global error handling middleware
 		- in the err where the error is triggered we normally will set the status, statusCode & message
 
-	# 115 - Better Errors And Refactoring
+# 115 - Better Errors And Refactoring
 
-	- let's refactor the error handlers to make it better
-	- create an AppError class file in utils folder
-		- extends Error
-		- receive message and statusCode
-		- send message to super
-		- set the statusCode, status and isOperational
-		- set Error.captureStackTrace
-		- export the class
-	 - require the class in app.js
-	 - the next function to trigger the error hanlder, send the AppError class object as the arguments
-	 - create errorController file
-	 - move the global error handler function into the errorController file, then export it
-	 - require it in app.js, send the global error handler in the app.use()
-	 - test using postman
+- let's refactor the error handlers to make it better
+- create an AppError class file in utils folder
+	- extends Error
+	- receive message and statusCode
+	- send message to super
+	- set the statusCode, status and isOperational
+	- set Error.captureStackTrace
+	- export the class
+	- require the class in app.js
+	- the next function to trigger the error hanlder, send the AppError class object as the arguments
+	- create errorController file
+	- move the global error handler function into the errorController file, then export it
+	- require it in app.js, send the global error handler in the app.use()
+	- test using postman
+
+# 116 - Catching Errors in Async Functions
+
+- this is a very difficult chapter
+- basically, we want to consolidate all the error catching codes from all controller functions and put it in one place
+- originally all functions in the controller are async function, thus it requires try catch block, thus making our code looks messy
+- so we create a function, that will wrap the async functions, receiving the async function as parameters
+	- const catchAsync = fn => {}
+	- fn is the parameter of the function
+	- so we do: catchAsync(*the async function*)
+	- the async function is assigned to fn
+	- then inside catchAsync function, we immediately call fn function:
+		- like this =>> fn()
+		- fn must have 3 parameters as well
+		- fn(req, res, next)
+		- fn is a async function, thus it returns a promise
+		- but when a async function encounter errors, the promise will not be fullfilled and the error can be catched:
+			- fn(req, res, next).catch(err => next(err))
+- but we got 2 problems:
+	- the function catchAsync and fn are immediately called, then the result is returned to exports.createTour, and this is not what we want, we want just to return the function, and it should only be invoked when there is a request received
+	- the parameters req, res & next are not known
+- solution:
+	- catchAsync return an anonymous function that received req, res & next as parameters and in the anonymous function we called the fn function
+- then all the functions in tourController files will be amended:
+	- wrapped all the async functions in catchAsync function call
+	- remove the try catch and error response code
+- to make it even better, move the catchAsync function to catchAsync file in utils folder, export it, the require it in tourController file
+
