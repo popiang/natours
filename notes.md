@@ -647,3 +647,14 @@
 - reason being is, if the id sent to the url is valid, but the tour is not exist, express will return success status but with 0 data
 - so we add this piece of code to handle this situation
 - the next function is return, to make sure the flow of the execution immediately return, doesn't go to the next line
+
+# 118 - Errors During Development vs Production
+
+- the idea is, we want to give different error messages in development and production environment
+- in development we want to get as much info on the error as possible, but in production we want to give out minimum and appropriate error message to end users
+- using process.env.NODE_ENV, we check if it's dev or prod, then send the appropriate response
+- do this in the errorController.js
+- create 2 function to send error response, for dev and prod
+- using if else, call the respective error function based on the process.env.NODE_ENV value
+- then in production environment, to distinguish between isOperational errors and other errors, check for isOperational field in the error object. Is is there and true, send errors to users as usual, but if it's not send generic error message to end user and send error message to console for developer's reference later on
+ 
