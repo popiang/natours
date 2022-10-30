@@ -671,3 +671,10 @@
 	- return a new AppError()
 	- now it becomes an isOperational error with a meaningfull error message to end users
 
+# 120 - Handling Duplicate Database Fields
+
+- capture the error message with a code 11000 using if statement
+- call a function handleDuplicateFieldsDB(error)
+- in the function get the err.KeyValue.name value and create a message
+- return a new AppError with the message and a status code
+
