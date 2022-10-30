@@ -657,4 +657,17 @@
 - create 2 function to send error response, for dev and prod
 - using if else, call the respective error function based on the process.env.NODE_ENV value
 - then in production environment, to distinguish between isOperational errors and other errors, check for isOperational field in the error object. Is is there and true, send errors to users as usual, but if it's not send generic error message to end user and send error message to console for developer's reference later on
- 
+
+# 119 - Handling Invalid Database IDs
+
+- there are 3 types of error that are coming from mongoose, but we need to flag as isOperational so we can send meaning error messages back
+- but this need only be done in production env as in development env we want all error messages be sent back
+- first is invalid database id
+	- the error stack contains name field with the value CastError
+	- if the error stack contains this value, this is an invalid database id error from mongoose
+	- use if condition to check it
+	- use a function : handleCaseErrorDB(err)
+	- in the function simply create a message using the err.path & err.value
+	- return a new AppError()
+	- now it becomes an isOperational error with a meaningfull error message to end users
+
