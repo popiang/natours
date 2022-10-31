@@ -692,9 +692,17 @@
 
 - this is errors coming from mongodb, such as incorrect database password
 - handle it in the server.js file
-- create event listener for 'unhandledRejection'
+- catch using event listener for 'unhandledRejection'
 	- listen using process.on
 	- console.log error message properly
 	- close the server
 	- exit the process
+
+# 123 - Catching Uncaught Exceptions
+
+- catch using event listener for 'uncaughtException'
+	- listen using process.on
+	- console.log error message properly
+	- exit the process
+	- put at the top of the page so it is listening to everything
 

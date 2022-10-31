@@ -14,7 +14,6 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
-
 // to modify the incoming req data
 // data from body is added into req object
 app.use(express.json());
