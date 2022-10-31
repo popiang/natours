@@ -678,3 +678,13 @@
 - in the function get the err.KeyValue.name value and create a message
 - return a new AppError with the message and a status code
 
+# 121 - Handling Mongoose Validation Errors
+
+- capture the error message with an error name ValidationError using if
+- call a function handleValidationErrorDB(error)
+- in the function:
+	- the error messages are in errors sub object
+	- get those messages into arrays using Object.values(err.errors).map(el => el.message)
+	- create the message, append the error messages using join('. )
+	- return a new AppError with the message and a status code
+
