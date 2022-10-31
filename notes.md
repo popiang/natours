@@ -688,3 +688,13 @@
 	- create the message, append the error messages using join('. )
 	- return a new AppError with the message and a status code
 
+# 122 - Errors Outside Express - Unhandled Rejections
+
+- this is errors coming from mongodb, such as incorrect database password
+- handle it in the server.js file
+- create event listener for 'unhandledRejection'
+	- listen using process.on
+	- console.log error message properly
+	- close the server
+	- exit the process
+
