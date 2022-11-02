@@ -706,3 +706,17 @@
 	- exit the process
 	- put at the top of the page so it is listening to everything
 
+# #####################################################
+
+# 125 - Modelling Users
+
+- we start by creating user schema
+- create userModel.js
+- require mongoose
+- create userSchema with below fields:
+	- name
+	- email
+	- password
+	- confirmPassword
+- then create User: const User = mongoose.model('User', userSchema)
+- then export the User
