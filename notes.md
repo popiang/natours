@@ -737,3 +737,24 @@
 
 - test create user using postman
 - double check in mongodb
+
+# 127 - Managing Passwords
+
+- start with checking password === confirmPassword
+- do it in userSchema, under confirmPassword
+	- add validate
+		- add validator function
+		- add message
+- test in postman
+
+- then we hash the password
+- do it in the userModel
+- install bcryptjs package and require it
+- use document pre middleware
+	- use on save, to take action right before document is saved
+	- check and proceed only if password is modified
+	- hash the password using bcrypt and asign back to this.password
+	- delete confirmPassword 
+	- call next()
+	- hash is async function, thus it return a promise, so the funtion must be async and the bcrypt is await
+- test with postman
