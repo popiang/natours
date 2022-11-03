@@ -720,3 +720,20 @@
 	- confirmPassword
 - then create User: const User = mongoose.model('User', userSchema)
 - then export the User
+
+# 126 - Creating New Users
+
+- basically we will do all user related action like creating new users, authenticating users, logging users in, updating password and etc in the authentication controller
+- not in user controller
+- create authController.js
+- require User
+- create signup function that receive req, res, next and create user using User.create(req.body)
+- don't forget the await
+- send response as usual with the data of user
+- wrap the whole function using catchAsync to handle exception
+
+- in userRoutes, require authController
+- create route with http method post for signup and assign the function signup from authController
+
+- test create user using postman
+- double check in mongodb
