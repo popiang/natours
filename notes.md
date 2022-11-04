@@ -758,3 +758,16 @@
 	- call next()
 	- hash is async function, thus it return a promise, so the funtion must be async and the bcrypt is await
 - test with postman
+
+# 129 - Signing Up Users
+
+- first, udpate the previous code to create user in authController.js
+- then npm install jsonwebtoken and require it
+- in config.env store the jwb data:
+	- jwb_secret - should be 32 characters long
+	- jwt_expires_in
+- create token:
+	- jwt.sign(data, secret, option(expiresIn))
+	- use data from config for above
+- send the token in the response to login the new user
+
