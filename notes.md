@@ -771,3 +771,17 @@
 	- use data from config for above
 - send the token in the response to login the new user
 
+# 130 - Logging In Users
+
+* in user model, at password field, add attribute select: false, so password won't be reveled when we retrieve users data
+* complete the getAllUsers in userController to test
+
+- in authController create login function and export it
+- receive email and password from the body
+- check if no value then return new AppError
+- then user findOne to query by email, then set explicit +password to get the password as well in the result
+- in the userModel, we create an instance function correctPassword which receive user input password and password from db from above fineOne, use bcrypt.compare and compare both password and return true or false
+- back to authController, check if the user input password is correct by using the correctPassword function
+- check if user exist, then check if password correct, if either is false then return new AppError with message incorrect email or password
+- if everything is ok then generate the token and send it in the response
+- refactor the code a bit, create the generateToken at the top of the file and call it wherever neccessary

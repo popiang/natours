@@ -1,6 +1,13 @@
 const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/appError');
+
+const signToken = id => {
+    return jwt.sign({ id: id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN
+    });
+};
 
 exports.signup = catchAsync(async (req, res, next) => {
     // const newUser = await User.create(req.body);
@@ -12,9 +19,7 @@ exports.signup = catchAsync(async (req, res, next) => {
         confirmPassword: req.body.confirmPassword
     });
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN
-    });
+    const token = signToken(newUser._id);
 
     res.status(201).json({
         status: 'success',
@@ -22,5 +27,31 @@ exports.signup = catchAsync(async (req, res, next) => {
         data: {
             user: newUser
         }
+    });
+});
+
+exports.login = catchAsync(async (req, res, next) => {
+    const { email, password } = req.body;
+
+    // 1) check if email and password exist
+    if (!email || !password) {
+        return next(new AppError('Please provide email and password!', 400));
+    }
+
+    // 2) check if user exists && password is correct
+    // add select password to add password into the result of findOne
+    // use +password, because in userModel we have set the field password select as false
+    const user = await User.findOne({ email: email }).select('+password');
+
+    if (!user || !(await user.correctPassword(password, user.password))) {
+        return next(new AppError('Incorrect email or password!', 401));
+    }
+
+    // 3) if everything is ok, send token to client
+    const token = signToken(user._id);
+
+    res.status(200).json({
+        status: 'success',
+        token: token
     });
 });
