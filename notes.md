@@ -785,3 +785,20 @@
 - check if user exist, then check if password correct, if either is false then return new AppError with message incorrect email or password
 - if everything is ok then generate the token and send it in the response
 - refactor the code a bit, create the generateToken at the top of the file and call it wherever neccessary
+
+# 131 - Protecting Tour Routes - Part 1
+
+- the best place to do route protection is in the tourRoutes file
+- in getAllTours router, we call a middleware to check if user has right to access getAllTours
+- the middleware is created in authController
+	- create the middleware as usual, call it protect
+- require it in the tourRoutes and call it before getAllTours in the router
+- in the middleware:
+	- token in send from client request through header
+	- in header: key: Authorizaition, value: Bearer thetoken
+	- in middleware the token can be retrieved from header : req.headers.authorization
+	- so check:
+		- the Authorization is there
+		- it starts with 'Bearer'
+	- if true, retrieve the token using split(' ')[1]
+	- then check the token again, if not available, return next(new AppError('You are not logged in. Please login to get access', 401))
