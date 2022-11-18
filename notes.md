@@ -840,3 +840,31 @@
 		- if true, meaning user has changed the password after token is generated
 	- call this static method in the authController in this 4th step
 	- if true, return next(new AppError(**, **)) as usual
+
+# 134 - Authorization - User Roles and Permissions
+
+- firstly, we add role field in the user schema
+	- user : {
+		type: String,
+		enum: ['admin', 'guide-lead', 'guide', 'user'],
+		default: 'user'
+	}
+- clear the table and create new users, normal user and an admin
+- at the moment, we focus on deleting tour
+	- in tour route, before deleteTour middleware, we add protect middleware and restrictTo middleware
+	- restrictTo middleware will restrict deletion feature only to certain roles
+	- the middleware can receive multiple roles as parameters
+	- now create the middleware in authController
+
+- create the restrictTo middleware
+- but since it needs to receive the roles parameters, we wrape the middleware in a function which receive the roles as arguments
+- the received roles arguments are roles that are allowed to do the tour deletion
+- so we need to compare with the role on current user
+- that value can be found in : req.user.role
+	- passed by the previous middleware - protect
+- now all we need to check if the current user role is in the user roles array
+- simply user !roles.includes(req.user.role) to check
+- if not included, simply return new AppError('', 403)
+- if included(allowed), simply execute next() to pass the flow to the next middleware
+
+
