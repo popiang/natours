@@ -23,8 +23,6 @@ app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
     req.requesTime = new Date().toISOString();
-    // eslint-disable-next-line no-console
-    console.log(req.headers);
     next();
 });
 

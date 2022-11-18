@@ -802,3 +802,41 @@
 		- it starts with 'Bearer'
 	- if true, retrieve the token using split(' ')[1]
 	- then check the token again, if not available, return next(new AppError('You are not logged in. Please login to get access', 401))
+
+# 132 - Protecting Tour Routes - Part 2
+
+- next is to verify the above token
+- use jwt.verify(token, process.env.JWT_SECRET)
+- require promisify from util
+- use it to promisify jwt.verify and asign it to a variable decoded
+
+- error handling:
+	- handleJWTError : error when token is modified
+	- in errorController, create handleJWTError function to simply create new AppError with a proper message and error status code
+	- add code to handle error.name === JsonWebTokenError and call the above function
+	* only works in production
+
+	- handleTokenExpiredError : error when token expired
+	- handle it the same way as above
+	* only works in production
+
+- next is to check if user still exist
+- above decoded variable contains user id: decoded.id
+- get user using User.findById
+- if not exist
+	- return next(new AppError(message, statuscode))
+
+- check if user's password changed after token issued
+	- add field passwordChangeAt in the user schema with the type Date
+	- then create a static method in userModel
+		- name changePasswordAftert
+		- parameters JWTTimestamp
+		- check if value changePasswordAt is exist, it if only exists if user has changed the password and that's when we need to concern
+		- if not exist, simply return false
+		- if exist, convert the time to seconds
+		- then compare it with JWTTimestamp
+		- JWTTimestamp < changePasswordAt
+		- return the comparison result
+		- if true, meaning user has changed the password after token is generated
+	- call this static method in the authController in this 4th step
+	- if true, return next(new AppError(**, **)) as usual
