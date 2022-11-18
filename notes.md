@@ -867,4 +867,31 @@
 - if not included, simply return new AppError('', 403)
 - if included(allowed), simply execute next() to pass the flow to the next middleware
 
+# 135 - Password Reset Functionality : Reset Token
+
+- firstly create a forgotPassword middleware function in authController
+- steps:
+- 1. get user based on posted email
+	- find the user by using the user email
+	- if user not exist, simply return error as usual with 404 code
+- 2. generate the random token
+	- create additional fields in user schema:
+		- passwordResetToken: String
+		- passwordResetExpires: Date
+	- create the function to generate the random token in userModel.js
+	- require crypto
+	- generate the token = crypto.randomBytes()
+	- encrypt the generated token using crypto
+	- assign the encrypted token to this.passwordResetToken field
+	- assign expires time to this.passwordResetExpires
+		- Date.now() * 10 * 60 * 1000 (10 minutes)
+	- return the resetToken (not encrypted)
+	* the not encrypted resetToken will be sent to user's email, the encrypted one will be save in database
+	* when the user clicks the link to reset password in the email, the unencrypted resetToken will be compared with the encrypted one in the database
+
+	- in the authController, we call the function that create the token to reset password
+	- save the user data : user.save()
+
+	
+
 
