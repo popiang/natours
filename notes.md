@@ -969,7 +969,10 @@
 - steps:
 	- get user from collection
 	- if user not exist, return next(new AppError()) as usual
+	- the compare currentPassword from client with password from table, if not the same return next(new AppError()) as usual
 	- if ok, update the new password for the user
 	- save(update) the user
 	- validation in user schema will check if password equals confirmPassword
 	- finally, log in the user and send proper response to client
+
+* refactor the code, move the part to log in user into a function, createSendToken(user, statusCode, res)
