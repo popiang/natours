@@ -933,3 +933,31 @@
 
 - finally test the middleware using postman with valid and invalid email addresses
 
+# 137 - Password Reset Functionality - Setting New Password
+
+- firstly, make sure in the userRoute.js, middleware for resetPassword, in the url there's the token parameter
+- for resetPassword, there involved steps:
+	- get user based on token
+		- in this scenario, when have no information at all of the user except the token sent to the user, so using the token we will try to find the user in the database
+		- firstly, using the not encrypted token, we encrypt it using crypto
+		- then using the hashedToken, we use user.findOne to find the token
+		- in the query, we also add filter to find user with passwordResetExpires still valid($gt: Date.now())
+	- if token not expired and there's a user, set the new password
+		- if user not exist, return next(new AppError()) with proper message and 400 status code
+		- if ok, then set the user object the new password and confirmPassword, set passwordResetToken & passwordResetExpires to undefined
+		- then save the user, user.save()
+	- update the changedPasswordAt property for the user
+		- this is being done by pre middleware in the model file
+		- create pre middleware
+		- check if it's a new user or the password is not modified, then simply run next()
+			- !this.isModified('password') || this.isNew
+		- if not of both above cases, then set the user passwordChangeAt to current date time
+			- this.passwordChangeAt = Date.now() - 1000
+			- we minus 1000 milliseconds because sometimes the value is saved to fast before the jwt token is generated
+			- it's not 100% accurate but it's a small hack to make sure technically the token is always created after the password has been changed
+	- log the user in, send JWT
+		- log in the user by using the signToken(user._id)
+		- return success reponse
+- once everything is done, test using postman
+
+
