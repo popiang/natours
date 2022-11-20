@@ -892,6 +892,44 @@
 	- in the authController, we call the function that create the token to reset password
 	- save the user data : user.save()
 
-	
+# 136 - Sending Emails with Nodemailer
 
+- create account in mailtrap.io for email testing
+- once completed, get the SMTP settings
+	- username, password, host & port
+- save all those settings in config.env
+
+- npm install nodemailer
+- create email.js in utils
+- require nodemailer
+- create async funtion which receive 'options' as a parameter
+	- create transporter
+		- nodemailer.createTransport({})
+		- set the host, port and auth using values from config.env
+	- define the email
+		- create mail options block
+		- set the from, to, subject and text
+		- value for to, subject & text are from the options parameter
+	- send the email
+		- transporter.sendMail(mailOptions)
+	- export the function
+
+- in authController, in final part of forgotPassword middleware which is send the token to user's email
+	- create the reset URL
+		- resetURL = `${req.protocol}://${req.get(
+        'host')}/api/v1/users/resetPassword/${resetToken}`
+	- create the message which includes the resetURL
+	- in a try catch block, send the email
+	- await the sendEmail
+	- in send email, set the options arguments block
+		- email: user.email
+		- subject: **
+		- message: message
+	- if ok, send appropriate response
+	- if not ok, error will be catched catch block
+		- reset user passwordResetToken & passwordResetExpires to undefined
+		- save it *await
+		- then return next(new AppError()) as usual with 500 status code
+
+- finally test the middleware using postman with valid and invalid email addresses
 
