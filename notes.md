@@ -960,4 +960,16 @@
 		- return success reponse
 - once everything is done, test using postman
 
+# 138 - Updating The Current User - Password
 
+- in userRoutes, create route for udpatePassword
+- in the route, call authController.protect first to make sure only logged in user can update the password
+
+- in authController, create updatePassword function, wrappped with catchAsync as usual
+- steps:
+	- get user from collection
+	- if user not exist, return next(new AppError()) as usual
+	- if ok, update the new password for the user
+	- save(update) the user
+	- validation in user schema will check if password equals confirmPassword
+	- finally, log in the user and send proper response to client

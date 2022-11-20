@@ -207,3 +207,27 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
         token
     });
 });
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+    // get user from collection
+    const currentUser = await User.findById(req.user._id);
+
+    // check if the posted current password is correct
+    if (!currentUser) {
+        return next(new AppError('User is not exist. Please try again!', 400));
+    }
+
+    // if password is correct, update to new password
+    currentUser.password = req.body.password;
+    currentUser.confirmPassword = req.body.confirmPassword;
+    currentUser.passwordChangeAt = Date.now();
+    await currentUser.save();
+
+    // log user in, send JWT token
+    const token = signToken(currentUser._id);
+
+    res.status(200).json({
+        status: 'success',
+        token
+    });
+});
