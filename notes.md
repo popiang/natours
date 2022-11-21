@@ -994,3 +994,20 @@
 	- the filteredBody then is used in the findByIdAndUpdate
 - try with postment
 
+# 140 - Deleting the Current User
+
+- the basic idea of deleting user is, we don't really delete the user data from the database, but we simply set the user to inactive
+- first thing, add active field in the user schema and set the default value tu true
+- then create the deleteMe function as usual
+- use findByIdAndUpdate(req.user.id, {active:false})
+- return proper response
+
+- in userRoutes.js, set the route to delete, use delete http method, call the protect first, then call the deleteMe
+
+- test using postmen
+
+- because now user model has active fields, we want to make sure only active users are displayed whenever we query them
+- so, we use query middleware
+- in userModel.js, we create userSchema.pre(/^find/, function(next){})
+- in the middleware, this.find({active:{$ne:false}})
+- then next()
