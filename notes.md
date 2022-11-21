@@ -1025,3 +1025,13 @@
 - the way around it, we remove the secure: true field in the options
 - the in if statement, we check in the env is production and then we set cookieOption.secure = true
 - test using postman and look at the created cookie
+
+# 143 - Implementing Rate Limiting
+
+- this method is to limit the number of request received from the same IP in the short period of time
+- in app.js, install express-rate-limit and require it
+- create a limiter middleware:
+	- rateLimit({options})
+	- max, windowMs, message
+- use it:
+	- app.use('/api', limiter)
