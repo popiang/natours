@@ -1011,3 +1011,17 @@
 - in userModel.js, we create userSchema.pre(/^find/, function(next){})
 - in the middleware, this.find({active:{$ne:false}})
 - then next()
+
+# 142 - Sending JWT Via Cookie
+
+- in authController in createSendToken function where we create and send the token, we set the cookie
+- res.cookie('jwt', token, {option})
+- option: 
+	- in config.env set JWT_COOKIE_EXPIRES_IN=90
+	- expires: new Date(Date.now + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
+	- secure: true, will only be sent in encrypted connection
+	- httpOnly: true, the cookie cannot be access or modified by browser in anyway
+- it cannot be test in development because of the secure: true, we in dev we don't use https
+- the way around it, we remove the secure: true field in the options
+- the in if statement, we check in the env is production and then we set cookieOption.secure = true
+- test using postman and look at the created cookie
