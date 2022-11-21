@@ -1035,3 +1035,10 @@
 	- max, windowMs, message
 - use it:
 	- app.use('/api', limiter)
+
+# 144 - Setting Security HTTP Headers
+
+- npm install helmet
+- require it in app.js
+- simply call: app.use(helmet())
+- helmet helps to secure Express apps by setting various HTTP headers
