@@ -1054,3 +1054,13 @@
 	- app.use(xss())
 		- sanitize agains melicious html/javascript code
 
+# 146 - Preventing Parameter Pollution
+
+- npm install hpp
+- Express middleware to protect against HTTP Parameter Pollution attacks
+- require it in app.js
+- use it:
+	- app.use(hpp())
+- however, we don't want to filter all parameters
+- the way around it is to whitelist 
+- hpp({whitelist:['duration']})
