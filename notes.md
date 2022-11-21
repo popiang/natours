@@ -1042,3 +1042,15 @@
 - require it in app.js
 - simply call: app.use(helmet())
 - helmet helps to secure Express apps by setting various HTTP headers
+
+# 145 - Data Sanitazation
+
+- npm install express-mongo-sanitize
+- npm install xss-clean
+- require both in app.js
+- use it:
+	- app.use(mongoSanitize())
+		- sanitize against NoSQL query injection
+	- app.use(xss())
+		- sanitize agains melicious html/javascript code
+
