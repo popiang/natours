@@ -976,3 +976,21 @@
 	- finally, log in the user and send proper response to client
 
 * refactor the code, move the part to log in user into a function, createSendToken(user, statusCode, res)
+
+# 139 - Updating The Current User - Data
+
+- in userRoutes.js, create a route for update user data called /updateMe, call userController.updateMe, but before that call authController.protect to make sure only logged in user can do the user data udpate
+- in userController, create updateMe function
+- steps:
+	- check if the body of the req data contains password or confirmPassword data, if it does, return an error mentioning that this route is not to update password, if want to update password go to route /updatePassword
+	- then update the user document
+	- however we cannot user user.save() because validation for required fields will take place
+	- so we need to use findByIdAndUpdate()
+	- pass the id, the data to update and options
+	- options= new:true, runValidators:true
+	- for the data, it should only contains name and email of the user, because we don't want to update anything else
+	- to achieve that, we create a function that receive req.body, 'name', 'email' as the parameters, and in the function we loop trough the req.body object and if the current el is included in the allowed fields, insert into a new obj which will be returned
+	- filteredBody = filterObj(req.body, 'name', 'email')
+	- the filteredBody then is used in the findByIdAndUpdate
+- try with postment
+
