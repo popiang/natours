@@ -1064,3 +1064,36 @@
 - however, we don't want to filter all parameters
 - the way around it is to whitelist 
 - hpp({whitelist:['duration']})
+
+# 150 - Modelling Locations (Geospatial Data)
+
+- it is decided that location is embeded in tour model schema
+- add startLocation, then location
+- mongodb support geospatial data out of the box
+- geospatial data basically data describe places on earth using longitude and latitude
+- startLocation
+	- mongodb uses GeoJSON to specify geospatial data
+	- for this object to be recognized as GeoJSON, we need type and coordinate fields
+	- each of this field will have it's own schema type option
+	- type:
+		- type: String
+		- default: 'Point'
+		- enum: ['Point'] (to make sure can only be 'Point')
+	- coordinates: [Number]
+		- the longitude & latitude
+	- address: String
+	- description: String
+	- startLocation is not really a document itself
+	- it's just an object describing certion location on earth
+	- to really create new document and embed in another document, we need to create an array
+- location
+	- [{ same as above }]
+	- add additional, day: Number
+
+- we will import brand new data from dev-data, tours.json which have the startLocation and location data
+- in import-dev.js file, change the name of file to import to tours.json
+- then run the file:
+	- first delete
+		- node ./dev-data/data/import-dev-data.js --delete
+	- then import
+		- node ./dev-data/data/import-dev-data.js --import
