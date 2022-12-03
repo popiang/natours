@@ -1110,3 +1110,20 @@
 	- use Promise.all to get the guides data and set it to this.guides (overwrite with actual user objects)
 - test using postmen
 - only work for creating tour
+
+# 152 - ModellingTourGuides - Child Referencing
+
+- the previous chapter was only to show how to do embedding
+- but it's not really ideal, so we'll switch to referencing
+- first, we comment out the previous middleware
+- then we delete the created tour
+- then we amend the schema
+	- guides: [] -> to mark as embedded
+		- {}
+			- type: mongoose.Shcema.ObjectId
+				- to indicate the type is an object id
+			- ref: 'User'
+				- to indicate the above id is User object id
+				- no need to import at the top of the page for this
+- test using postman
+- guides will only contain the id
