@@ -1174,3 +1174,8 @@
 	- create route for get all reviews
 - add route to app.js as middleware
 - test create and get all the reviews using postman
+
+# 156 - Populating Reviews
+
+ - simply add query middleware in review schema
+ - this.populate('tour').populate('user')
