@@ -1150,3 +1150,16 @@
 	- tourSchema.pre('/^find/', function(next){})
 	- this.populate()
 - test using postman for both get tour by id and get all tours
+
+# 154 - Modelling Reviews - Parent Referencing
+
+- in this chapter, we simply create a reviewSchema
+- fields:
+	- review
+	- rating
+	- createdAt
+	- tour (ref to tour)
+	- user (ref to user)
+- add option to display virtual fields
+- export as usual
+
