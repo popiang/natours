@@ -1179,3 +1179,22 @@
 
  - simply add query middleware in review schema
  - this.populate('tour').populate('user')
+
+ # 157 - Virtual Populate - Tour and Reviews
+
+- the issue is, if we query tour, how do we also get the reviews of the tour
+- the solution is virtual populate
+- think of it as a way of keeping the review id in the tour but without persisting it in the database
+- how:
+tourSchema.virtual('reviews', {
+	ref: 'Review',			// the schema model we refer to
+	foreignField: 'tour',	// the field in the ref model
+	localField: '_id'		// the corresponding value in this model
+});
+- next, we add populate like before, to only in getTourById, because it would too much of data retreival if we use it as well in getAllTours.
+- how, in tourController, in get tour by id, in the query, simply add .populate('reviews') at the end of the statements
+
+- if we watch carefully, we can notice there are chains of query happens
+	- tour -> reviews -> tour 
+- this is not ideal, so we simply need to remove the populate for tour in reviews
+
