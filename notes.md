@@ -1097,3 +1097,16 @@
 		- node ./dev-data/data/import-dev-data.js --delete
 	- then import
 		- node ./dev-data/data/import-dev-data.js --import
+
+# 151 - Modelling Tour Guides - Embedding
+
+- this is a sample of embedding
+- guides are embedded in tour data
+- so when creating a tour, we also specify the guides id in an array
+- then we create a document middleware to find the user based on the id during save, and then save the whole user object(embedded) in the tour data
+- the middleware:
+	- it receive this.guides (the id in an array)
+	- use map, then use find by id, and it returns promises
+	- use Promise.all to get the guides data and set it to this.guides (overwrite with actual user objects)
+- test using postmen
+- only work for creating tour
