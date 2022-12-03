@@ -1163,3 +1163,14 @@
 - add option to display virtual fields
 - export as usual
 
+# 155 - Creating And Getting Reviews
+
+- create reviewController
+	- create review
+	- get all reviews
+- create reviewRoutes
+	- create route for create review
+		- protect and filter users using authController
+	- create route for get all reviews
+- add route to app.js as middleware
+- test create and get all the reviews using postman
