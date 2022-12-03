@@ -1198,3 +1198,27 @@ tourSchema.virtual('reviews', {
 	- tour -> reviews -> tour 
 - this is not ideal, so we simply need to remove the populate for tour in reviews
 
+# 158 - Implementing Simple Nested Routes
+
+- to create reviews:
+	- // POST /tour/tourid/reviews
+	- tour id will come from the url and the user id comes from the logged in user
+
+- to get reviews:
+	- // GET /tour/tourid/reviews
+	- tour id will come from the url and the user id comes from the logged in user
+
+- to get specific reviews:
+	- // GET /tour/tourid/reviews/reviewid
+	- tour id and review id will come from the url and the user id comes from the logged in user
+
+- since the route starts with tour, then the routes are created in tourRoutes.js
+- require reviewController
+- create the route
+	- router.route('/:tourId/reviews').post()
+
+- in review controller, in create review method, we amend:
+	- if (!req.body.tour) req.body.tour = req.params.tourId
+	- if (!req.body.user) req.body.user = req.user.id
+
+- try using postman
