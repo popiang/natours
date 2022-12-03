@@ -1127,3 +1127,26 @@
 				- no need to import at the top of the page for this
 - test using postman
 - guides will only contain the id
+
+# 153 - Populating Tour Guides
+
+- the idea is to get the whole document of guides when querying the tour, to make it looks like the guides data has always been there when the truth is only has the ids
+- so easy
+- for get tour by id, in the tour controller, in the getTourById, in the query, simply add:
+	- .populate('guides'); at the end of the findById statement
+- then test using postman
+
+- simple hack to filter the output data for above
+- instead of 'guides', put in option object {}
+	- path: 'guides'
+	- select: '-__v -passwordChangeAt'
+		- to filter out both fields from the output
+
+- populate in the controller only works for get tour by id
+- it doesn't work for get all tours
+- so the solution is, we put the populate statement into a query middleware, then all methods that want to find the tour will get the whole guides document populated
+- in tour controller, we cut the populate statement
+- in tourModel.js, we create a new query middleware
+	- tourSchema.pre('/^find/', function(next){})
+	- this.populate()
+- test using postman for both get tour by id and get all tours
