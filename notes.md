@@ -1281,3 +1281,22 @@ tourSchema.virtual('reviews', {
 - so we remove that particular codes into a seperate middleware (setTourUserIds) and call the middleware in the review routes right before create review middleware
 
 
+# 163 - Factory Functions - Reading
+
+- we want to do the same technique just as before
+- but in getting data we also have populate
+- so first we create getOne method in the factory
+- but we have additional parameter - popOptions
+- in the body, first we findbyid
+- then we check, if popOptions is available, populate the above query by using the popOptions parameter
+- the rest is basically the same
+- apply it to get tour, get review and get user
+
+- now we do getAll
+- we will use the one in getAllTour because it's the most complete and perfect method with APIFeatures
+- everything else is basically the same
+- but in original get review, we have code to filter if it has tourId, so we simply going to add the code directly into the factory method (hack) because it pretty harmless
+- apply it to getAllTours, getAllReviews, getAllUsers
+- try with postman
+- now get reviews also has the functionaly to features like filter and sort
+
