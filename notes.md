@@ -1246,4 +1246,26 @@ tourSchema.virtual('reviews', {
 - then send this filter varialble in Review.find(filter)
 - test using postman
 
+# 161 - BuildingHandlerFactoryFunctions_Delete
+
+- after a while, we can see that many lines of code are repeated for various Model
+- so the idea here is to create a function factory
+- as the name implies, it create function based on the passed model
+- let's start with delete tour
+- first, we create a file, handlerFactory.js, require catchAsync & AppError
+- then simply copy the delete tour code from tourController into handlerFactory.js
+- amend it
+	- export a function with the name deleteOne, so it's general, can be used to delete tour, reviews etc
+	- set the parameter to Model
+	- set the body of the function with the copied code just now
+	- change the Tour to Model
+	- change the error message to make it general
+- now in tourController.js, require handlerFactory
+- comment out deleteTour function
+- create a new one
+- exports.deleteTour = factory.deleteOne(Tour);
+- because of javascripts closure feature, the req.params.id will be available in the factory.deleteOne function
+- test with postman
+- do the same for reviews
+- do the same for users
 
