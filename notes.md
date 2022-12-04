@@ -1238,4 +1238,12 @@ tourSchema.virtual('reviews', {
 	- but mergeParams allow the route to get the parameters from the former route as well
 - test using postman
 
+# 160 - Adding A Nested GET Endpoint
+
+- now we also want to add nested route for the getAllReviews
+- if got tour id, only reviews for that particular tour will be retreived
+- in getAllReviews method in reviewController, simply check if req.params.tourId is available, and it it is, populate it to a filter variable : { tour: req.params.tourId }
+- then send this filter varialble in Review.find(filter)
+- test using postman
+
 
