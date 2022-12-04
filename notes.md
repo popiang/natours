@@ -1300,3 +1300,15 @@ tourSchema.virtual('reviews', {
 - try with postman
 - now get reviews also has the functionaly to features like filter and sort
 
+# 164 - Adding a/me Endpoint
+
+- the logged in user wants to get the document of his/her self
+- getOne requires the id to be passed as the parameter
+- but in getme, the id should come from the logged in user
+- so we simply create additional middleware:
+	- exports.getMe
+	- req.params.id = req.user.id
+	- then call next()
+- in userRoutes.js, we simply create new get router for '/me', then first call the protect, then getMe, then getUser
+- test using postman
+

@@ -14,6 +14,11 @@ const filterObj = (obj, ...allowedFields) => {
     return newObj;
 };
 
+exports.getMe = (req, res, next) => {
+    req.params.id = req.user.id;
+    next();
+};
+
 exports.getUser = factory.getOne(User);
 // do now update user password with this
 exports.updateUser = factory.updateOne(User);
