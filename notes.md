@@ -1269,3 +1269,15 @@ tourSchema.virtual('reviews', {
 - do the same for reviews
 - do the same for users
 
+# 162 - Factory Functions - Update And Create
+
+- we do same technique for udpate
+- create updateOne in handlerFactory
+- use it in tourController, userController and reviewController
+- create createOne in handleFactory
+- don't need to use in creating user because we already have signup
+- use it in tourController and reviewController
+- for review controller, originally we have extra step that is to check the tour and user id
+- so we remove that particular codes into a seperate middleware (setTourUserIds) and call the middleware in the review routes right before create review middleware
+
+
