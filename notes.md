@@ -1222,3 +1222,20 @@ tourSchema.virtual('reviews', {
 	- if (!req.body.user) req.body.user = req.user.id
 
 - try using postman
+
+# 159 - Nested Routes With Express
+
+- the current issue is the implementation is a bit messy because we put the route to create reviews in tour router simply because the route starts with tour, and also the code is duplicated in review rotuer
+- solution -> use express feature: merge param
+- so first, remove the code in tour router
+- the require reviewRouter in tourRoutes
+- then : router.use('/:tourId/reviews', reviewRouter)
+	- this is actually mounting the router
+	- just like in app.js
+- then in reviewRoutes:
+	- express.Router({mergeParams: true})
+	- why, by default each router only have access to parameters of their specific route
+	- but mergeParams allow the route to get the parameters from the former route as well
+- test using postman
+
+
