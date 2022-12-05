@@ -1312,3 +1312,18 @@ tourSchema.virtual('reviews', {
 - in userRoutes.js, we simply create new get router for '/me', then first call the protect, then getMe, then getUser
 - test using postman
 
+# 165 - Adding Missing Authentication and Authorization
+
+- in tour routes, for getAllTours, we want to make it public so any other website or application in the world can embed our Natour app
+- so we remove the protect for getAllTour
+- for create, patch & delete, we set protect and restrictTo('admin', 'lead-guide')
+- for monthly-plan, set the protect and restrictTo('admin', 'lead-guide', 'guide')
+
+- in user routes, signup, login, forgotPassword and resetPassword are public
+- all others can only be access for logged in user
+- so simply add router.use(authController.protect) after the first 4 public routes, and it will make sure all other routes can only be access by logged in user
+- for the last 5 routes, they can only be accessed by admin, so we do the same technique, simply add router.use(authController.restrictTo('admin')) right before these 5 routes, so now only admin can access these 5 routes
+
+- for reviews, all routes must be authenticated, so we used protect
+- createReview only by 'user', so use restrictTo
+- patch & delete can only be done by user & admin, so use restrictTo for both

@@ -6,23 +6,19 @@ const router = express.Router();
 
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
-
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
-router.patch(
-    '/updatePassword',
-    authController.protect,
-    authController.updatePassword
-);
 
-router.get(
-    '/me',
-    authController.protect,
-    userController.getMe,
-    userController.getUser
-);
-router.patch('/updateMe', authController.protect, userController.updateMe);
-router.delete('/delete Me', authController.protect, userController.deleteMe);
+// run protect for all routes from here onwards
+router.use(authController.protect);
+
+router.patch('/updatePassword', authController.updatePassword);
+router.get('/me', userController.getMe, userController.getUser);
+router.patch('/updateMe', userController.updateMe);
+router.delete('/delete Me', userController.deleteMe);
+
+// now only admin can access the routes from here onwards
+router.use(authController.restrictTo('admin'));
 
 router
     .route('/')
