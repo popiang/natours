@@ -1327,3 +1327,20 @@ tourSchema.virtual('reviews', {
 - for reviews, all routes must be authenticated, so we used protect
 - createReview only by 'user', so use restrictTo
 - patch & delete can only be done by user & admin, so use restrictTo for both
+
+# 166 - Importing Review and User Data
+
+- let's now import the provided data of users and reviews into database
+- but we need to tweak the import script a bit
+	- copy, paste and edit JSON.parse code for users and reviews
+	- require User and Review
+		- for User, add option { validateBeforeSave: false } to turn off validation which will ask for confirm password
+		- in user Model, comment out middleware to enqrypt the password because users data from the file contains passwords which are already encrypted
+	- in import function, copy paste and edit Tour.create(tours) for User and Review
+	- in delete function, copy paste and edit Tour.deleteMany() for User and Review
+- run : node ./dev-data/data/import-dev-data.js --delete
+- run : node ./dev-data/data/import-dev-data.js --import
+- then check in mongodb
+- then test using postman
+- finally don't forget to remove the comment on the code that encrypt the password
+
