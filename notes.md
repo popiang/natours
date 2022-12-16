@@ -1344,3 +1344,16 @@ tourSchema.virtual('reviews', {
 - then test using postman
 - finally don't forget to remove the comment on the code that encrypt the password
 
+# 167 - Improving Read Performance With Indexes
+
+- we all know that indexes improve query performance
+- how to add indexes in node:
+	- in tourModel:
+		- tourSchema.index({price: 1})
+		- 1 = sort ascending
+		- -1 = sort descending
+		- this is called single field index
+		- if there are more then one indexes required in the query, we can create compound field indexes
+		- tourSchema.index({price: 1, ratingsAverage: -1})
+- if we ever want to remove an index, we not only need to remove it in the code, but we must also remove it in the database itself
+	
