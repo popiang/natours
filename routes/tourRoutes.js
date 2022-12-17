@@ -30,6 +30,12 @@ router
         tourController.createTour
     );
 
+// /tours-distance?distance=23&center=40,45&unit=mi -> also can
+// /tours-distance/233/center/-40,45/unit/mi -> but this one is cleaner
+router
+    .route('/tours-within/:distance/center/:latlng/unit/:unit')
+    .get(tourController.getToursWithin);
+
 router
     .route('/:id')
     .get(tourController.getTour)

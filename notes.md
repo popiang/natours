@@ -1424,3 +1424,26 @@ tourSchema.virtual('reviews', {
 - so we can round it in the tourModel
 - in the ratingsAverage field add this:
 	- set: val => Math.round(val * 10) / 10
+
+# 171 - Geospatial Queries - Finding Tours Within Radius
+
+- the idea is to find all tours within certain distance from a center point
+- firstly, we create a route
+	- router.route('/tours-within/:distance/center/:latlng/unit/:unit')
+	- get(tourController.getToursWithin)
+	- got 3 parameters:
+		- distance
+		- latlng
+		- unit
+- then in tourController, create the above controller
+	- get all 3 parameters from req.params, use block destructure
+	- then get the lat and lat into their own variables
+	- then check if lat or lng are available, if either one not, return new AppError
+	- if everything ok, set the response
+	- console.log to test
+- next, in the controller we query for the tours
+	- Tour.find({})
+	- startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius]}}
+	- the startLocation must be indexed:
+		- tourSchema.index({startLocation: '2dsphere})
+	- display the tours in the response
