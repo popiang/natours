@@ -1382,3 +1382,32 @@ tourSchema.virtual('reviews', {
 		- ratingsAverage: stats[0].avgRating
 		- stats[0] because result from the aggregation is in array format
 - test again with postman and check in mongodb the changes
+
+# 169 - Calculating Average Rating On Tours - Part 2
+
+- now we want to update the review
+- the review for the tour is updated when a review is updated or deleted
+- we need to use query middleware
+	- reviewSchema.pre(/^findOneAnd/, async function(next){})
+	- this will cover both update and delete for a review
+- in the middleware we need to find the current review document
+	- we simply can use: this.r = await this.findOne();
+	- r means review
+	- this.r, so the result will be available in the document and can be used in the next middleware
+	- try first with postman and console.log the result to double check if it works
+- now to recalculate the average rating, it cannot be done within the same middleware because it's a pre middleware, the data is fresh from the database, so it's not updated
+- but it doesn't matter because we only needs the tour id in the review document
+- so we create a post middleware, also using /^findOneAnd/, which will execute after the pre middleware, use the this.r data to get the tour id
+- call the calcAverageRatings functions, send the this.r.tour as argument
+- but calcAverageRatings function needs this.constructor, so the equivalent of it is: this.r.constructor.calAverageRatings
+- it returns a promise, so must await async
+- test it baby!!!
+- also test for delete!!
+
+- the calcAverageRatings method needs a little amendment
+- if the last review is delete, the stats will return an empty array
+- so we need to check:
+	- if (stats.length > 0)
+		- proceed with the code
+	- else
+		- populate quantity = 0, and average = 4.5
