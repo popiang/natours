@@ -1356,4 +1356,29 @@ tourSchema.virtual('reviews', {
 		- if there are more then one indexes required in the query, we can create compound field indexes
 		- tourSchema.index({price: 1, ratingsAverage: -1})
 - if we ever want to remove an index, we not only need to remove it in the code, but we must also remove it in the database itself
-	
+
+# 168 - Calculating Average Rating On Tours - Part 1
+
+- average rating is defined or redefined everytime there's a new review, edit review or delete review
+- so to implement this, we'll use a static method
+- reviewSchema.statics.calcAverageRatings = async function(tourid) {}
+	- in the body we use aggregation
+		- $match: { tourL: tourId }
+		- $group: 
+			- _id: '$tour'
+			- nRating: { $sum: 1 }
+			- avgRating: { $avg: '$rating' }
+- we call this function in the post middleware, once the review data is saved, then this function will be called
+	- reviewSchema.post('save', function(){})
+		- this.constructor.calcAverageRatins(this.tour)
+- test using postman, create new tour, then create review, console.log the stats
+
+- now we want to update the particular tour with the ratingsAverage & ratingsQuantity value
+- require Tour model
+- after the aggregation pipeline part, simply call:
+	- Tour.findByIdAndUpdate(tourId, {})
+	- the body:
+		- ratingsQuantity: stats[0].nRating
+		- ratingsAverage: stats[0].avgRating
+		- stats[0] because result from the aggregation is in array format
+- test again with postman and check in mongodb the changes
