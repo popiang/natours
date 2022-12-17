@@ -1447,3 +1447,33 @@ tourSchema.virtual('reviews', {
 	- the startLocation must be indexed:
 		- tourSchema.index({startLocation: '2dsphere})
 	- display the tours in the response
+
+# 172 - GeospatialAggregation_CalculatingDistances
+
+- the idea is to calculate the distance of the tours from the point provided in the router
+- first we create the route
+	- router.route('/distances/:latlng/unit/:unit)
+	- .get(tourController.getDistances)
+- now we create the controller in tourController
+	- exports.getDistances = catchAsync(async(req, res, next) => {})
+	- get the latlng & unit from req.params
+	- get the individuals lat & lng from latlng
+	- set the multiplier: 
+		- const multiplier = unit === 'mi' ? xxxxx ? xxxx;
+	- check if lat & lng exist, if not next(new AppError())
+	- we use aggregate
+		- const distances = await Tour.aggregate([])
+		- the first and only stage, $geoNear
+			- near
+				- type: 'Point'
+				- coordiantes: [lng * 1, lat * 1]
+					- * 1 to convert to integer
+			- distanceField: 'distance'
+			- distanceMultiplier: multiplier
+		- $project
+			- to only display distance & name
+			- distance: 1
+			- name: 1
+- return the response properly
+- test using postman
+			
