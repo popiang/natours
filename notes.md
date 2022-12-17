@@ -1411,3 +1411,16 @@ tourSchema.virtual('reviews', {
 		- proceed with the code
 	- else
 		- populate quantity = 0, and average = 4.5
+
+# 170 - Preventing Duplicate Reviews
+
+- the idea is, one user can only post 1 review on a particular tour
+- to achieve this, all we need to use is compound index with options:
+	- reviewSchema.index({ tour: 1, user: 1 }, { unique: true })
+- that's all
+- test it using postman
+
+- a little improvement, the ratingsAverage can become 4.666666
+- so we can round it in the tourModel
+- in the ratingsAverage field add this:
+	- set: val => Math.round(val * 10) / 10
