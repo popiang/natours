@@ -1477,3 +1477,22 @@ tourSchema.virtual('reviews', {
 - return the response properly
 - test using postman
 			
+# ##############################################################
+
+# 176 - Setting Up Pub In Express
+
+- install pug but don't need to require it
+- create model folder
+- create base.pug file
+- in the file
+	- h1 The Park Camper
+	- same as: <h1>The Park Camper</h1>
+
+- in app.js
+	- require path
+	- app.set('view engine', 'pug')
+	- app.set('views', path.join(__dirname, 'views'))
+	- router
+		- put along with other router in the app.js
+		- app.get('/', (req, res) => {res.status(200).render('base')})
+
