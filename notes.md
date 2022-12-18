@@ -1527,3 +1527,9 @@ tourSchema.virtual('reviews', {
 	- // this will comment the code and still be displayed in the html page as commented html
 	- //- this will comment the code and will not be displayed in the html page
 
+# 178 - Creating Our Base Template
+
+- simply take all the content in overview.html and put it in the base.pug file
+- modify it accordingly
+- this will become the base file
+
