@@ -1540,3 +1540,30 @@ tourSchema.virtual('reviews', {
 - then in base.pug inlcude _header & include _footer in replace for the codes that we have cut out
 - make sure the indentations are all correct
 
+# 180 - Extending Our Base Template With Blocks
+
+- now we are going to extend the base template for overview and tour page
+- overview page will display all the tours and tour page will display the details of the tour
+- create overview.pug and tour.pug files in views folder
+- in app.js we create the route
+	- app.get('/overview', (req, res) => {})
+		- render the 'overview' page with the title
+	- app.get('/tour/, (req, res) => {})
+		- render the 'tour' page with the title
+- in base.pug
+	- the content part, simply put 
+		- block content
+			h1 This is a placeholder heading
+		- it means, this part will be replace by content supplied by other pug files that extends base.pug
+	- in title part: title Natours | #{title}
+		- the title will change according to the value supplied in the title local variable from the router
+- in overview.pug
+	- extends base
+		- this will take all the base template code from base.pug into overview.pug except the content part
+	- then put this code
+		- block content
+			h1 This is the tour overview
+		- this define the a block called content 
+		- we can put anything in here, but simply indent the content to make it belongs to this block
+- in tour.pug
+	- simply do the same as above
