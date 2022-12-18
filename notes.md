@@ -1496,3 +1496,34 @@ tourSchema.virtual('reviews', {
 		- put along with other router in the app.js
 		- app.get('/', (req, res) => {res.status(200).render('base')})
 
+# 177 - First Steps With Pug
+
+- doctype html at the top just like regular html file
+- then html
+- then then content of the html must he indented:
+	- html
+		head
+			title
+- indentation is important to indicate an element is a child of a parent
+- add css
+	- link(rel='stylesheet' href='css/style.css')
+- add favicon
+	- link(rel='shortcut icon' type='image/png' href='img/favicon.png')
+- the css file can be fetch because the files in the public folder have been set as static files using middleware in app.js
+- send variables to pug:
+	- res.status(200).render('base',{tour: 'The Foreset Hiker'})
+	- in pug
+		- h1= tour
+		- this will display the content of tour variable as content of the h1 element
+		- this is called buffered code
+- in pug we can also write simple javascript code
+	- h1= tour.toUpperCase()
+- we also can write unbuffered code, which will not be displayed
+	- - const x = 5	-> unbuffered code
+	- h2= 2 * x		-> buffered code
+- we can also output variable value using #{tour}
+	- title Natours | #{tour}
+- comment
+	- // this will comment the code and still be displayed in the html page as commented html
+	- //- this will comment the code and will not be displayed in the html page
+
