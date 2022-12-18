@@ -1567,3 +1567,17 @@ tourSchema.virtual('reviews', {
 		- we can put anything in here, but simply indent the content to make it belongs to this block
 - in tour.pug
 	- simply do the same as above
+
+# 181 - Setting Up The Project Structure
+
+- create viewRoutes.js and viewController.js files
+- delete the base router in app.js as it's only for testing
+- move overview and tour routers from app.js into viewRoutes and then fix the code accordingly
+- move the function in overview and tour routers into viewController file
+- in viewController file, export both functions as getOverview and getTour
+- require viewController into viewRoutes file
+- place the viewController.getOverview and viewController.getTour accordingly into the routes
+- for overview router, set the url to '/', so when user go to the base url, it will display the overview page to display all the tours
+- in app.js, require viewRoutes
+- put app.use('/', viewRouter) as a replace for the removed codes
+- done and done
