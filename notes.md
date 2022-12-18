@@ -1581,3 +1581,29 @@ tourSchema.virtual('reviews', {
 - in app.js, require viewRoutes
 - put app.use('/', viewRouter) as a replace for the removed codes
 - done and done
+
+# 181 - Building The Tour Overview - Part 1
+
+- steps
+	- get tour from collection
+	- build the template
+	- render the template using tour data from step 1
+
+- get tour from collection
+	- in viewController 
+		- require Tour and catchAsync
+		- in getOverview method
+			- update the method with catchAsync, async, next
+			- then, const tours = await Tour.find
+			- put the result in the response
+				- tours: tours
+
+- in overview.pug
+	- translate the main part in the overview.html to pug
+	- only for 1 card
+	- then check if it's ok
+	- then after .card-container add 
+		- each tour in tours
+		- this tours is a variables
+		- it will create a loop for it's content
+		
