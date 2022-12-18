@@ -1533,3 +1533,10 @@ tourSchema.virtual('reviews', {
 - modify it accordingly
 - this will become the base file
 
+# 179 - Including Files Into Pub Templates
+
+- in views folder, create _header.pug & _footer.pug files
+- in base.pug, cut the header & footer codes and paste in accordingly in _header.pug & _footer.pug files
+- then in base.pug inlcude _header & include _footer in replace for the codes that we have cut out
+- make sure the indentations are all correct
+
