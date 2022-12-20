@@ -1606,4 +1606,13 @@ tourSchema.virtual('reviews', {
 		- each tour in tours
 		- this tours is a variables
 		- it will create a loop for it's content
-		
+
+# 183 - Building The Tour Overview - Part 2
+
+- simply output the value from the variable tour accordingly throughout the whole card component
+- for img: img/tours/${}
+- for date
+	- the first in array
+	- format the output
+		- .toLocaleString('en-us', {month: 'long', year: 'numeric'})
+- to add space between to inline element, add '| ' (there's a space after the pipeline)
