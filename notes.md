@@ -1616,3 +1616,15 @@ tourSchema.virtual('reviews', {
 	- format the output
 		- .toLocaleString('en-us', {month: 'long', year: 'numeric'})
 - to add space between to inline element, add '| ' (there's a space after the pipeline)
+
+# 184 - Building The Tour Page - Part 1
+
+- first, we create the router in viewRoutes.js, with :slug as the parameter
+- then in viewController, in the getTour method:
+	- Tour.findOne({slug: req.params.slug})
+	- .populate({path: 'reviews', fields: 'review rating user'})
+	- send the result of the findOne in the response to be used in the pug file
+- in tour.pug
+	- simply change the dummy data with real data from tour variables
+	- use mixin for repetitive code
+	- format the date output
