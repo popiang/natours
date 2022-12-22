@@ -1628,3 +1628,10 @@ tourSchema.virtual('reviews', {
 	- simply change the dummy data with real data from tour variables
 	- use mixin for repetitive code
 	- format the date output
+
+# 185 - Building The Tour Page - Part 2
+
+- simply continue replacing the dummy data with real data from tour variables
+- use javascript if where necessary
+- use mixin for where necessary
+- mixin put in different file
