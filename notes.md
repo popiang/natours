@@ -1716,4 +1716,14 @@ tourSchema.virtual('reviews', {
 		- left: 100
 		- right: 100
 
+# 188 - Building The Login Screen
+
+- create the router in viewRoutes.js
+	- /getLoginForm without any input
+- create the controller in viewController.js
+	- simply render the login page
+- create login.pug
+	- copy from provided template
+- fix the link for login page in the _header.pug
+
 
