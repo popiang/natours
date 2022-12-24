@@ -1670,3 +1670,50 @@ tourSchema.virtual('reviews', {
 
 - it seems the javascript is loaded before the 	DOM fully rendered
 - so use defer
+
+# 187 - Including A Map With Mapbox - Part 2
+
+- go to mapbox.com and register an account, create a token and create a map style
+- then click Integrate Mapbox and choose web
+- copy the script, link to the tour.pug head, then click next
+- copy the js code and paste it into mapbox.js
+	- copy paste the token we created
+	- copy paste the style we created
+	- add:
+		- scrollZoom: false
+		- so user won't accidently zoom the map in or out when scrolling the page
+- we tested, there'll be a bug, which the solution is provided by a user manuel, apply his solution and then try checking the map
+
+- then we need to set the bounds
+- the idea is, the map zoom in to the extend which it will still display all the locations in the map
+- all the locations must be set to the bounds
+- first, create bound object:
+	- const bounds = new mapboxjs.LngLatBounds();
+	- next we need to bound object to extends all the locations
+	- we do this in the loop
+- we iterate the locations
+- each iteration
+	- create a html element div with class name marker
+	- then we add marker
+		- new mapboxgl.Marker({})
+		- element: el (the div element created above)
+		- achor: bottom (the location is at the bottom of the marker)
+		- .setLngLat(loc.coordinates)
+		- .addTo(map)
+	- then we add popup
+		- new mapboxgl.Popup({})
+		- offset: 30 (not sure what this does???!!!)
+		- .setLngLat(loc.coordinates)
+		- .setHTML(`<p>${loc.day}: ${loc.description}</p>`)
+		- .addTo(map)
+	- bounds.extend(loc.coordinates)
+
+- finally:
+	- map.fitBounds(bounds, {})
+	- padding: {}
+		- top: 200
+		- bottom: 150
+		- left: 100
+		- right: 100
+
+
