@@ -1635,3 +1635,38 @@ tourSchema.virtual('reviews', {
 - use javascript if where necessary
 - use mixin for where necessary
 - mixin put in different file
+
+# 186 - Including A Map With Mapbox - Part 1
+
+- fix bug in getTour handler in viewsController, pass the tour name in the title field when render the response
+
+- create js folder in public folder
+- create mapbox.js
+- simply console out something in there
+
+- now integrate the file with the tour.pug
+- but if we put it just like that in the base.pug, the javascript file will be loaded for every file that extends base.pug
+- the solution, in base.pug, we extends a block in base template file
+- the block is in the head, and all the content of the head will be in the block
+- but we will not extrend the head block because that will replace all the head content in the base template file
+- instead, in tour.pug, we use:
+	- block append head
+	- what happens is, the tour.pug already extends base template file, and the above script simply add additional code at the end of the head part in the base template file, hence it is called append head
+	- there's also prepend which will add the code at the beginning
+ 
+ - now we need to send the data of maps to the javascript file
+ - in tour.pug file, in the map section, we already have a div with an ID map
+ - so we set the location data in the div using data attributes
+	- we name the data attribute data-locations
+	- #map(data-locations=`${JSON.stringify(tour.locations)}`)
+	- the data attribute cannot hold data in array or object type, so we convert it to string using JSON.stringify
+	- check the data in browser inspect
+
+- now let's get the data in mapbox.js
+- document.getElementById('map').dataset.locations
+- assign it to a constant variable
+- but before assigning, cover it back to object/array
+	- JSON.parse
+
+- it seems the javascript is loaded before the 	DOM fully rendered
+- so use defer
