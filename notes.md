@@ -1774,3 +1774,43 @@ tourSchema.virtual('reviews', {
 - then try to view the tour and an error message supposed to be displayed 
 - the try to login and try again open a tour
 
+# 190 - Logging In Users With Our API - Part 2
+
+- we want to control the display of login button, if user not logged in, display login button, if user is logged in display logout button 
+- so we need to send the info to pug file
+- we create a new middleware in authController just to check if user logged in, if logged in, send the user data to pug file
+- simply copy paste protect function and modify it
+- check if req.cookies.jwt is exist
+	- reuse the decoding code
+	- if user not exist, simply return next(), no error message
+	- if password changed after token is issued, simply return next(), no error message
+	- if everything is ok, simply assign to:
+		- res.locals.user = currentUser
+		- return next()
+		- res.locals.user is a way to send data back to pug file
+- if req.cookies.jwt not exist, simply call next()
+
+- then in viewRoutes, simply called the isLoggedIn middleware
+	- router.use(authController.isLoggedIn)
+- this will cause every request will go through this middleware and will check if there is a user logged in
+
+- in _header.pug, we will use pug if else to check if user local variable is exist, indicating there's a logged in user
+- if user
+	- display logout button and user img
+	- replace the hard coded value with data from user variable
+- else
+	- display log in button and sign up
+
+- back in login.js in login function, we can check if login is successfull after calling the login url using axios
+- if you remember, the api will always result status='success' if the login is successfull
+- so we can access this data 
+- if (result.data.status === 'success) {}
+- alert successfull login for debugging
+- set timeout for 1500 and redirect the page to '/'
+	- location.assign('/')
+- this will redirect the user from login page to the landing page after successfull login
+
+- in the catch(error) part
+	- alert(error.response.data.message)
+	- for debugging upon failed login
+
