@@ -1724,6 +1724,53 @@ tourSchema.virtual('reviews', {
 	- simply render the login page
 - create login.pug
 	- copy from provided template
+	- make sure the identation is correct
 - fix the link for login page in the _header.pug
 
+# 189 - Logging In Users With Our API - Part 1
+
+- first, we are going to use axios, an http client for node.js, in the login function to call the login url and send the username and password
+- search for axios cdn to get the cdn for axios lib script tag, and paste it in the base.pug file at the bottom of the page
+- that makes the lib available to be used through out pages in the app
+- in login.js
+	- create a login function that receive email and password as parameters
+	- make it async
+	- function body: 
+		- const result = await axios({})
+			- method: 'POST'
+			- url: 'http://127.0.0.1:3000/api/v1/users/login'
+			- data
+				- email: email
+				- password: password
+		- surround it with try catch block and console.log the error.response.data 
+
+- select the from using css selector .form
+- listen for submit
+- prevent default
+- get email and password from input fields
+- call the login function above and send the email and password
+- console log to test the flow of the data both in the client and backend
+
+- there will be bug, so in viewController in login function, add .set() , copy the content from QA section or my completed Natour project
+- change localhost to 127.0.0.1 everywhere
+
+- now test the login page, with incorrect and correct credentials and check the console.log
+- for correct credentials, check the cookie in the browser for jwt cookie
+
+- now back to backend, npm install cookie-parser
+- require it in app.js
+- add it as middleware
+	- app.use(cookieParser())
+- test it, in app.js, in the test middleware, simply console.log the req.cookie
+
+- if everything is ok, in authController in protect function, other than accepting token from request header, we now must add to accept token form the cookie
+- add else if (req.cookie.jwt)
+	- token = req.cookie.jwt
+
+- now time to test it
+- in viewRoutes, require authController
+- in getTour router, simply add authController.protect
+- in the browser, delete the previous cookie to log out the user
+- then try to view the tour and an error message supposed to be displayed 
+- the try to login and try again open a tour
 
