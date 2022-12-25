@@ -1814,3 +1814,60 @@ tourSchema.virtual('reviews', {
 	- alert(error.response.data.message)
 	- for debugging upon failed login
 
+# 191 - Logging In Users With Our API - Part 3
+
+- firstly, create alert.js in js folder, for custom alert code
+- create hideAlert function
+	- query .alert element
+	- if exist
+		- el.parentElement.removeChild(el)
+- export const showAlert = (type, msg) => {}
+	- call hideAlert()
+		- to hide any existing alert message
+	- create markup
+		- const markup = `<div class"alert alert--${type}">`
+			- content: ${msg}
+		- insert above html element in the body afterbegin
+		- call hideAlert after 5 seconds
+
+- then, comment out all script import in base.pug
+- create index.js in js folder
+- npm install parcel-bundler --save-dev
+- in packege.json scripts
+	- "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
+	- "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
+- in base.pug at the bottom add script tag
+	- script(src='/js/bundle.js')
+
+- in login.js
+	- import axios
+		- import axios from 'axios'
+		- import { showAlert } from './alert'
+	- replace success alert message with showAlert with type 'success' and a message
+	- replace error message with showAlert with type 'error' and error message
+	- export the login function
+		- export const login = async (email, password) => {}
+	- move other code into index.js
+
+- in mapbox.js
+	- export the displayMap function
+	- export const displayMap = locations => {}
+	- remove other code into index.js
+
+- in index.js
+	- npm install @babel/polyfill
+		- if not mistaken, the purpose is to convert model js code to old js code :)
+	- import displayMap function
+		- import { displayMap } from './mapbox'
+	- import login function
+		- import { login } from './login'
+	- clean up code to get rid of errors of null html element
+		- check if mapBox exist
+			- get the map dataset and assign into locations
+			- call displayMap(locations)
+		- check if loginForm exist
+			- call the event listener on submit
+
+- we still use mapbox cdn because there's an issue if we use mapbox and parcel together
+- execute npm run watch:js
+	- to watch any changes and re-generate the bundle.js
