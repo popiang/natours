@@ -12005,6 +12005,7 @@ var logout = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+// test some changesss
 exports.logout = logout;
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"index.js":[function(require,module,exports) {
 "use strict";
