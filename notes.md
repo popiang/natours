@@ -1915,3 +1915,22 @@ tourSchema.virtual('reviews', {
 		- return next()
 
 - done and done
+
+# 193 - Rendring Error Pages
+
+- create error.pug file
+- extends the base and add block content as usual
+
+- in errorController.js, for both Dev and Prod error functions we now check if the error is from API and from website
+- if (req.originalUrl.startsWith('/api'))
+- if from api, do the existing error handling
+- if from website, return response with error status code and render 'error' page
+	- title: 'Something went wrong!'
+	- msg: err.message
+- do this for both dev and prod error handling
+
+- fix a bug in the prod export part
+	- error message in not capture in the copy
+	- so: error.message = err.message
+
+- test errors for dev and prod

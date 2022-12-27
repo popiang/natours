@@ -38,4 +38,3 @@ export const logout = async () => {
 		showAlert('error', 'Error logging out! Try again.')
 	}
 }
-// test some changesss
