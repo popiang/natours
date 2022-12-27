@@ -1871,3 +1871,47 @@ tourSchema.virtual('reviews', {
 - we still use mapbox cdn because there's an issue if we use mapbox and parcel together
 - execute npm run watch:js
 	- to watch any changes and re-generate the bundle.js
+
+# 192 - Logging Out Users
+
+- http cookie can't be modified or deleted 
+- so to achieve logout feature, we simply replace the jwt cookit with a rubbish cookie which upon jwt verify will response to error and indicates no user is logged in
+
+- in authController.js
+	- export logout function
+	- exports.logout = (req, res) => {}
+	- res.cookie('jwt', 'loggedout', {})
+	- expires: new DAte(Date.now() + 10 * 1000)
+		- the rubbish jwt cookie will expire in 10 seconds
+	- httpOnly: true
+	- then return success response
+
+- in userRoutes.js
+	- create new route for logout
+	- GET
+	- 'logout', authController.logout
+
+- in login.js
+	- create and export logout function
+	- export const logout = aysnc () => {}
+	- wrap in try catch
+	- error - showAlert('error', 'some message')
+	- use exios to call logout route with GET method
+	- assign to const res
+	- then check if res.data.status is success
+		- if yes then reload page
+		- location.reload(true)
+
+- in index.js
+	- get logout button element by it's css name and assign to a const var
+	- check if the element exist, listen to event of click and call logout function
+	- opps, import the logout function from ./login
+
+- back in authController.js to make some adjustment
+	- in isLoggedIn
+	- remove catchasync because if user is logged out, we don't want to throw an error, we just want to call next()
+	- in the if(req.cookies.jwt) we wrap the whole code
+	- in the catch part simply 
+		- return next()
+
+- done and done
