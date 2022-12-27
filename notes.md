@@ -1934,3 +1934,24 @@ tourSchema.virtual('reviews', {
 	- so: error.message = err.message
 
 - test errors for dev and prod
+
+# 194 - Building The User Account Page
+
+- create account.pug
+- copy from template and paste
+- use mixin for repeatetive part
+- use js if for admin part
+- change hard code data with real value
+- create the route viewRoutes.js
+	- /me
+	- viewController.getAccount
+	- use protect
+* add isLoggedIn for other route, the we can remove the middleware for isLoggedIn
+- create getAccount in viewController
+- simply response 200 and render 'account' and send the title 'Your account'
+- in _header.pug
+	- set the link to /me
+- back to authController, in protect, also add
+	- res.locals.user = currentUser;
+- test
+
