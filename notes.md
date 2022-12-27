@@ -1955,3 +1955,26 @@ tourSchema.virtual('reviews', {
 	- res.locals.user = currentUser;
 - test
 
+# 195 - Updating User Data
+
+- for now, we will use traditional way to submit form, without using api call
+- in account.pug, in the form, set the form action and method
+	- action='/submit-user-data'
+	- method='POST'
+- in app.js, we need to add another middleware so then the form body is received by updateUserData function controller
+- app.use(express.urlencoded({}))
+	- extended: true
+	- limit: '10kb'
+- use User.findByIdAndUpdate()
+- assign to updatedUser
+- id: req.user.id
+- {},
+	- name: req.body.name
+	- email: req.body.email
+- {}
+	- new: true,
+	- runValidators: true
+- then send response with status 200, render 'account' and:
+	- title: 'Your Account'
+	- user: updatedUser
+		- so when reload we will display the updated data of the user

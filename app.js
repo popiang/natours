@@ -67,6 +67,7 @@ app.use('/api', limiter);
 // to modify the incoming req data
 // data from body is added into req object
 app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 // data sanitazation against NoSQL query injection
