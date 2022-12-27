@@ -1978,3 +1978,29 @@ tourSchema.virtual('reviews', {
 	- title: 'Your Account'
 	- user: updatedUser
 		- so when reload we will display the updated data of the user
+
+# 196 - Updating User Data With Our API
+
+- create updateSettings.js file
+- import axios and showAlert
+- create and export function updateData = async (name, email) => {}
+- wrap content with try catch, for error call showAlert('alert', error.response.data.message)
+- in try block, call await axios({})
+	- asign to const res
+	- method: 'PATCH'
+	- url: 'http://127.0.0.1:3000/api/v1/users/updateMe'
+	- data:
+		- name: name
+		- email: email
+	- check res.data.status === 'success'
+		- call showAlert('success', 'success message')
+
+- in index.js, import updateData
+- get formUserData html element
+- check if formUserData element exist
+	- check event listener
+		- prevent default
+		- get name & email values by id
+		- call updateData and send the arguments
+
+ 
