@@ -2003,4 +2003,27 @@ tourSchema.virtual('reviews', {
 		- get name & email values by id
 		- call updateData and send the arguments
 
- 
+ # 197 - Updating User Password With Our API
+
+ - we change the updateData function in updateSettings.js to cater also for updating password
+ - change the name to updateSettings
+ - received parameters (data, type)
+ - check type, if 'password' assign updateMyPassword url to const varialble url, if not the assign updateMe url
+ - set the url in the body to this url
+ - then set the data in the body to the data in the parameter
+ - showAlert('success', `${type.toUpperCase} updated successfully`)
+
+ - get the formUserPassword html element by class name
+ - check if element is available, listen to event of submit
+ - prevent default
+ - get passwordCurrent, password and confirmPassword from the form using id
+ - call updateSettings
+	- {passwordCurrent, password, passwordConfirm}, 'password'
+
+- add some effect to the save password button
+- add a class name
+- in the index.js, after preventDefault querySelect the classname, change the textContent to Updating..
+- after updateSettings, change back to Save Password
+
+- done and done...:)
+
