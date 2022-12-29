@@ -23,3 +23,4 @@ export const updateSettings = async (data, type) => {
         showAlert('error', error.response.data.message);
     }
 };
+// test

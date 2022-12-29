@@ -12056,6 +12056,7 @@ var updateSettings = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+// test
 exports.updateSettings = updateSettings;
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"index.js":[function(require,module,exports) {
 "use strict";
