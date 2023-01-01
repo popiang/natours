@@ -2058,6 +2058,40 @@ tourSchema.virtual('reviews', {
 	- in terminal
 	- in /public/img/users folder
 
+# 200 - Configuring Multer
 
+- bring the multer code from userRoutes.js to userController.js
+- in the controller, require multer and create a controller function upload of multer with the basic options
+- in userRoutes.js, simply replace the middleware of multer with the newly created controller function
 
+- now it's time to create configuration option for multer
+- multerStorage
+	- multer.diskStorage({})
+		- distination: (req, file, cb) => {}
+			- cb(null, 'public/img/users')
+			- * this to configure the destination
+		- filename: (req, file, cb) => ({})
+			- get the extention first from file.mimetype
+			- the value: 'image/png'
+			- use split('/')[1]
+			- cb(null, `user-${req.user.id}-${Date.now()}.${extension}`)
+- multerFilter
+	- (req, file, cb) => ({})
+		- if (file.mimetype.startWith('image'))
+			- * all image file will always 'image/png' image word in the front
+		- if true
+			- cb(null, true)
+			- this will simply tell that the uploaded file is a image
+		- if false
+			- cb(new AppError(), false)
+			- the filter will return false and the error message will be sent
+- now both option configurations will be used 
+- const upload = multer({})
+	- storage: multerStorage
+	- fileFilter: multerFilter
+- the multer upload object will be used as middleware
+	- exports.uploadUserPhoto = upload.single('photo')
+	- single -> will upload single file
+	- 'photo' -> name of the field
+- test with postman to upload image and not image
 
