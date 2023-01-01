@@ -52,11 +52,6 @@ exports.deleteUser = factory.deleteOne(User);
 exports.getAllUsers = factory.getAll(User);
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-    // eslint-disable-next-line no-console
-    console.log(req.file);
-    // eslint-disable-next-line no-console
-    console.log(req.body);
-
     // create error if user POST password data
     if (req.body.password || req.body.confirmPassword) {
         return next(
@@ -69,6 +64,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
     // filtered out unwanted fields name that are now allowed to be updated
     const filteredBody = filterObj(req.body, 'name', 'email');
+    if (req.file) filteredBody.photo = req.file.filename;
 
     // update user document
     const updatedUser = await User.findByIdAndUpdate(

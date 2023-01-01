@@ -2095,3 +2095,14 @@ tourSchema.virtual('reviews', {
 	- 'photo' -> name of the field
 - test with postman to upload image and not image
 
+# 201 - Saving Image Name To Database
+
+- in updateMe controller function, after filteredBody code check if req.file exist
+- if it does, simply add the req.file.filename to filteredBody.photo
+- test with postman, change profile pic and check in website
+
+- for new user, we set a default pic as profile pic
+- default.jpg
+- set it in the userSchema in the photo field as the default value
+- test create new user and try login in the website to check
+
