@@ -93,8 +93,6 @@ app.use(
 // test middleware
 app.use((req, res, next) => {
     req.requesTime = new Date().toISOString();
-    // eslint-disable-next-line no-console
-    console.log(req.cookies);
     next();
 });
 

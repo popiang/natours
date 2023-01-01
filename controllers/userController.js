@@ -26,6 +26,11 @@ exports.deleteUser = factory.deleteOne(User);
 exports.getAllUsers = factory.getAll(User);
 
 exports.updateMe = catchAsync(async (req, res, next) => {
+    // eslint-disable-next-line no-console
+    console.log(req.file);
+    // eslint-disable-next-line no-console
+    console.log(req.body);
+
     // create error if user POST password data
     if (req.body.password || req.body.confirmPassword) {
         return next(

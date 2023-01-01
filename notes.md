@@ -2027,3 +2027,37 @@ tourSchema.virtual('reviews', {
 
 - done and done...:)
 
+# ##############################################################
+
+# 199 - Image Uploads Using Multer: Users
+
+- first do some clean up of console.log
+- install multer
+- require multer in userRoutes.js
+- const upload = multer({dest: 'public/img/users'})
+	- to define settings
+- use in updateMe route
+	- call before updateMe controller
+	- upload.single('photo')
+		- single as we want to upload single file
+		- 'photo' is the name of field to hold the file, field in the form
+- this middleware will take care of taking the file and copying to the destination we set
+- it will also will put some information about the file in the request object
+- cl req.file in updateMe controller to see the info
+
+- test using postman
+- login as leo, then call updateMe
+- use form data
+- udpate name
+- update photo
+	- key: photo
+	- change type to file
+	- select leo.jpg from dev-data folder
+- send, and then check:
+	- in postman response
+	- in terminal
+	- in /public/img/users folder
+
+
+
+
