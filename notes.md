@@ -2106,3 +2106,24 @@ tourSchema.virtual('reviews', {
 - set it in the userSchema in the photo field as the default value
 - test create new user and try login in the website to check
 
+# 202 - Resizing Images
+
+- install sharp and require it in userController
+- comment out the previous multerStorage because it save it to the disk directly, so if we want to modify the pic first we better just upload the picture to memory buffer instead of directly to disk and read it back
+- change to multer.memoryStorage()
+- create a new middleware exports.resizeUserPhoto = (req,res, next) => {}
+	- check if there's no file in req, simply call next()
+	- create the file name and store it in req.file.filename
+		- because of multer.memoryStorage the name file is not stored yet
+		- we store the file name here because it need to be used in multiple places later
+		- btw, the extension is always jpeg
+	- call sharp(req.file.buffer)
+		- req.file.buffer is the uploaded file in the memory
+		- resize(500, 500)
+		- toFormat('jpeg') * so all pics in jpeg format
+		- jpeg({quality: 90})
+		- toFile(`public/img/users/${req.file.filename}`);
+	- then call next()
+- call this middleware in viewRoutes.js after uploadUserPhoto
+- test using postman using aarav profile
+
