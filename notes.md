@@ -2127,3 +2127,26 @@ tourSchema.virtual('reviews', {
 - call this middleware in viewRoutes.js after uploadUserPhoto
 - test using postman using aarav profile
 
+# 203 - Adding Image Uploads To Form
+
+- in account.pug
+	- remove the a element of Choose new photo
+	- replace it with input
+		- css class form__upload
+		- type='file'
+		- accept='image/*'
+		- id='photo'
+		- name='photo'
+	- label(for='photo') Choose new photo
+
+- in index.js in formUserData part
+	- we need to change the way we read the form
+	- const form = new FormData()
+	- then we append the data of the form
+	- form.append('name', document.getEle....('name').value)
+	- form.append('email', document.getEle....('email').value)
+	- form.append('photo', document.getEle....('photo').files[0])
+	- send the form to updateSettings
+		- updateSettings(form, 'data')
+
+- done, now try it
