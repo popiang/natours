@@ -2150,3 +2150,25 @@ tourSchema.virtual('reviews', {
 		- updateSettings(form, 'data')
 
 - done, now try it
+
+# 204 - Uploading Multiple Images : Tours
+
+- copy the configuration part of multer in userController into tourController, and then require multer and sharp
+- then create the middleware uploadTourImages
+	- upload.fields([])
+		- {name: 'imageCover', maxCount: 1}
+		- {name: 'images', maxCount: 3}
+- then create another middleware resizeTourImages
+	- standard middleware
+	- console.log(req.files)
+		- to see the uploaded files
+	- call next
+
+- in tourRoutes add both middleware uploadTourImages and resizeTourImages in the patch route before update tour controller function
+
+- create new tour using clone in mongodb so that most data of tour is available for it to render properly in the website
+- then using postman, upload the pictures using tour update api with patch http method
+	- use form data
+	- set the key value for image cover and 3 images
+- check the console.log to see the uploaded images
+
