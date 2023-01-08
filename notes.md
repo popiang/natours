@@ -2172,3 +2172,54 @@ tourSchema.virtual('reviews', {
 	- set the key value for image cover and 3 images
 - check the console.log to see the uploaded images
 
+# 205 - Processing Multiple Images
+
+- first we fix a bug in userController, add await async in resizeUserPhoto controller function
+- all of the operations in the sharp will take some time and happen in the backgroud and they are asynchronous code and should not block the event loop
+- but we call the next() immediately after the above code finish without waiting it to actually completed
+- not good idea
+- so use await async
+- also add the catchAsync
+
+- now we copy the sharp code from userController to tourController in resizeTourImages function
+- set the catchAsync
+- the add if the check if req.files.imageCover or no req.files.images, simply return next
+
+- cover image
+	- set the imageCoverFilename first
+		- `tour-${req.params.id}-${Date.now()}-cover.jpeg`
+	- in sharp
+		- located at req.files.imageCover[0]
+		- .buffer
+		- resize to 2000 x 1333
+		- format as jpeg as 90% quality
+		- to file
+			- `public/img/tours/${imageCoverFilename}`
+	- req.body.imageCover = imageCoverFilename
+	- to improve, simply replace the filename with req.body.imageCover in the variable assignment and in the toFile
+
+- other images
+	- contained in an array, so use loop to process
+	- req.files.images.forEach((file, i) => {})
+		- set the filename
+			- `tour-${req.params.id}-${Date.now()}-${i + 1}.jpeg`
+			- i + 1 because i is zero base
+			- the increased number is to diffrentiate the image files
+		- for the image processing simply copy the sharp code from above
+		- because the code is in the loop, the loop must be added with async
+		- changes the file name part in the toFile with filename
+	- now before this whole code, create req.body.images = []
+	- we will push filename into this array in every loop iteration
+	- req.body.images.push(filename)
+
+	- now there's just one small problem, that is we are not using async await correctly in this part of code
+	- the async await is only happening in the forEach loop but not AT the forEach, so it means it will immediately call the next() after it
+	- the solution is, change forEach to map, because the async code in the loop will return a promise, so if we change to map we can receive the returned promises
+	- but instead of saving the returned promises, we simply will use await Promise.all
+	- wrap the whole code with await.Promise.all
+
+
+
+
+
+		
