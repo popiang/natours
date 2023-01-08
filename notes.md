@@ -2218,8 +2218,50 @@ tourSchema.virtual('reviews', {
 	- but instead of saving the returned promises, we simply will use await Promise.all
 	- wrap the whole code with await.Promise.all
 
+# 206 - Building A Complex Email Handler
 
+- in email.js create a class and exports it
+- module.exports = class Email
+- in constructor received user & url
+	- this.to = user.email
+	- this.firstName = user.name.split(' ')[0]
+	- this.url = url
+	- this.from = `Shahril Mad Shah <${process.env.EMAIL_FROM}>`
+	- set the EMAIL_FROM in the config file
+- then create createTransport, copy from the existing one
+	- check first if it's production env, we will use sendgrid
+	- else return the nodemailer
+- delete the transport creation in the sendEmail
+- delete the module.exports = sendEmail
 
+- create send method after createTransport
+- receive template and subject
+	- will send actual email
 
+- create sendWelcome
+- doesn't receive any arguments
+- call this.send()
+	- simply send the template and subject argument
+	- ('welcome', 'Welcome to the Natours Family')
 
-		
+- then in send method
+	- render html for the email based on a pug template
+		- require pug
+		- pug.renderFile(`${__dirname}/../views/emails/${template}.pug`)
+		- add option after the template
+			- firstName: this.firstName
+			- url: this.url
+			- subject: subject
+		- assign to variable html
+	- define the mail options
+		- copy paste the mailOption from sendEmail old function into send method after pug render part
+		- replace the from, to, subject and html with the defined variables
+		- for text, we need to strip html content to a plain text
+		- for that, install html-to-text and require it
+
+	- create a transport and send email
+		- await this.newTransport().sendMail(mailOptionsa)
+		- async the send
+		- await the this.send
+		- async the sendWelcome
+
