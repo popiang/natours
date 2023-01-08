@@ -2265,3 +2265,31 @@ tourSchema.virtual('reviews', {
 		- await the this.send
 		- async the sendWelcome
 
+# 207 - Email Templates With Pug : Welcome Emails
+
+- create baseEmail.pug
+- copy and paste the email template provided by jonas into baseEmail
+- cut the style section, paste it in new file _style.pug and replace it with include _style
+- cut the whole content section and replace it with block content
+	- the content will come from welcome.pug which will extends baseEmail
+- in welcome.pug, extends baseEmail
+- put block content
+- then paste the content code under block content
+- replace firstname and url with variables
+
+- in authController, replace require send email to Email
+- comment out broken for now
+- in signup method
+	- after creating newUser
+		- set the url variable
+		- ${req.protocol}://${req.get('host')}/me
+		- this is the url to user setting page where user can change the password
+		- console.log the url to check
+		- then call
+			- await new Email(newUser, url).sendWelcome()
+
+- test by signing up new user and check mailtrap
+- there is an unresolved issue, when we click the Upload User Photo button in the email, it redirect to localhost, when we are expecting 127.0.0.1
+
+
+
