@@ -2291,5 +2291,25 @@ tourSchema.virtual('reviews', {
 - test by signing up new user and check mailtrap
 - there is an unresolved issue, when we click the Upload User Photo button in the email, it redirect to localhost, when we are expecting 127.0.0.1
 
+# 208 - Sending Password Reset Emails
+
+- create passwordReset.pug
+- copy paste the pug code from welcome.pug
+- get the sentence from authController in forgotPassword method, the forgot password long message, and put it in the second p in the pug file
+- the second sentence put it at the bottom
+- remove the CEO sentence
+- change the url to #{url}
+- change the button text
+
+- in authController in forgotPassword method, in the try block
+	- await new Email(user, resetURL).sendPasswordReset();
+	- user & resetURL are available in the method
+	- bring the const resetURL code also into the try block
+
+- test with postman
+- use forgot password api 
+- when get the email, use the token to really change the password
+- then try to login using the new password
+
 
 
