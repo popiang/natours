@@ -2456,3 +2456,46 @@ tourSchema.virtual('reviews', {
 	- this.populate('user').populate({})
 		- path: 'tour'
 		- select: 'name'
+
+# 214 - Creating New Bookings On Checkout Success
+
+- now we want to create a new booking data entry into the table upon success payment
+- at the moment, once payment is success, the system will redirect to homepage
+- for the sake of simplicity, we will add a middleware in the homepage router to save the booking data into table
+- not secure, a temporary workaround
+- the better way is to use stripe webhook, but it this only possible once the system is deployed
+
+- in the success url, we add a query string, to add the parameters required for the booking, tour, user, price, because this is a get request, so can't send body data
+- so it's not safe coz natours user who knows this url can purchase a tour simply by calling this particular url with the respective parameters
+
+- now let's create the middleware we were talking about
+- in bookingController create a function
+	- createBookingcheckout
+		- get tour, user & price from req.query
+			- const {tour, user, price} = req.query
+		- check all of the exist
+		- if not, call next()
+		- what is the next middleware anyway???
+		- it's in the viewRoutes.js in the '/' route
+		- in viewRoutes.js, require bookingController
+		- in '/' router, call bookingController.createBookingCheckout first before other middleware
+		
+		- require Booking from bookingModel.js
+		- if tour, user & price exist, call Booking.create({tour, user, price})
+		- await
+		- async the function
+		- catchAsync as well
+		- once done, we can't call next() because current url contains all the sensitive information
+		- so the workaround is by redirect to homepage url but without the extra parameters
+		- we going to use res.redirect
+			- res.redirect(res.originalUrl.split('?')[0])
+		- it will hit the same middleware again, but this time without tour, user & price parameters, so it will go to the next middleware in the router
+		- user will not have a chance to view the url with the extra parameters
+- test it out and check both in stripe and mongodb..:)
+
+
+
+
+
+
+		
