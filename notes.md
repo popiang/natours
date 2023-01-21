@@ -2380,5 +2380,37 @@ tourSchema.virtual('reviews', {
 	- else display the link as button to redirect to login page with message
 		- login to book tour
 	- check it in website
+- then add the stripe javascript script
+- get it from the documentation
+- put it in the tour.pug
 
-- 
+- create stripe.js file in js folder
+- disable eslint
+- import axios
+- call Stripe() and pass the public key, assign to stripe const
+- create bookTour function and export it
+	- receive tourId as parameter
+	- call axios() and passed the url and assign to session const
+		-  http://127.0.0.1:3000/api/v1/bookings/checkout-session/${tourId}
+	- await
+	- console.log the session variable
+
+- in index.js, import the bookTour function
+	- import { bookTour } from './stripe'
+- get the booking button using it's id book-tour
+- at the bottom of the page, add checking if bookBtn exist
+- if yes, add event listener to the button to click event
+	- use e.target
+	- change textContent to Processing...
+	- get the tour id from e.target.dataset.tourId
+	- call the bookTour function and pass the tourId
+- test clicking the book button in the website and check the console
+- wrape the whole content of the code in try catch
+- in the catch, simply console.log the error message and call the showAlert('error', err)
+- the final part
+	- await stripe.redirectToCheckout({})
+		- sessionId: session.data.session.id
+- test again in the website
+
+* some bug might appear
+* simply copy the code from complete project, the part in the viewController, getTour function, in the response part, in the set
