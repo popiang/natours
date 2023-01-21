@@ -2369,3 +2369,16 @@ tourSchema.virtual('reviews', {
 - try using postman
 - the return session from stripe contain the link to actually test the payment
 
+# 212 - Processing Payments On The Front-End
+
+- in tour.pug, control the book tour button
+	- check if user is logged in, display the book button
+		- if user
+		- set book-tour id for the button
+		- set data attribute
+			- data-tour-id=`${tour.id}`
+	- else display the link as button to redirect to login page with message
+		- login to book tour
+	- check it in website
+
+- 
