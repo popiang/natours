@@ -29,7 +29,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
                         ]
                     },
                     unit_amount: tour.price * 100,
-                    currency: 'usd'
+                    currency: 'myr'
                 },
                 quantity: 1
             }
