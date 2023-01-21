@@ -2352,6 +2352,11 @@ tourSchema.virtual('reviews', {
 	- require the route and put it after view route
 	- mount the route and middleware and put it after reviewRouter
 - back to controller page
+- copy the secret key from our account in Stripe page and save in the the config file
+	- STRIPE_SECRET_KEY=XXX
+- install stripe and require in this controller page
+- at the end of the stripe require:
+	- require('stripe')(process.env.STRIPE_SE*****)
 - steps:
 	- get the booked tour
 	- create the checkout session
