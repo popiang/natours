@@ -2338,3 +2338,34 @@ tourSchema.virtual('reviews', {
 	- cc details never reach our server, so we don't have to manage the security
 	- once charged, we will use stripe webhook on our backend to create new booking
 	- this part only works on deployed website
+
+# 211 - Integrating Stripe Into The Backend
+
+- create bookingController.js
+- create a method getCheckoutSession and export it
+- then create bookingRoute.js, copy content from reviewRoute.js and delete everything that is not related
+- create a get route
+	- /checkout-session/:tourId
+	- protect
+	- call the mehtod from booking controller
+- then in app.js
+	- require the route and put it after view route
+	- mount the route and middleware and put it after reviewRouter
+- back to controller page
+- steps:
+	- get the booked tour
+	- create the checkout session
+	- send the success response
+- get the booked tour
+	- simply using Tour.findById
+	- the tour id is in the parameter
+	- don't forget await
+- create the checkout session
+	- stripe.checkout.session.create({})
+	- await
+	- the options: simply refer the finish project
+- send the reponse upon success payment
+	- message and the created session
+- try using postman
+- the return session from stripe contain the link to actually test the payment
+
