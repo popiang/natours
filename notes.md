@@ -2311,7 +2311,30 @@ tourSchema.virtual('reviews', {
 - when get the email, use the token to really change the password
 - then try to login using the new password
 
+
 # 209 - Using Sendgrid For Real Emails
 
 
+# 210 - Credit Card Payments with Stripe
 
+- register Stripe free account
+- set up the Natours account
+	- change the branding icon, logo and brand color
+- get the API keys
+- for this project we will use stripe checkout server integration
+- summary:
+	- start at the backend where we implement a route to create a stripe checkout session 
+	- this session will contain data about the object to purchase (tour)
+		- price
+		- name
+		- image
+		- client email
+	- frontend, we will create a function to request the checkout session from the server once the user click the buy button
+	- it will hit the end point that we created at the backend, it will create the session and send it back to the client
+	- base on the session, stripe will create a checkout page for us
+	- user can input all the details of payment
+	- using the session, we will charge the credit card and it will use the public key from the stripe API
+	- stripe together with the session will charge the cc
+	- cc details never reach our server, so we don't have to manage the security
+	- once charged, we will use stripe webhook on our backend to create new booking
+	- this part only works on deployed website
