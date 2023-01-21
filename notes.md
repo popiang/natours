@@ -2419,3 +2419,40 @@ tourSchema.virtual('reviews', {
 
 * some bug might appear
 * simply copy the code from complete project, the part in the viewController, getTour function, in the response part, in the set
+
+# 213 - Modelling The Bookings
+
+- let's create the booking model
+- create bookingModel.js in models folder
+- require mongoose
+- create bookingSchema
+	- new mongoose.Schema({})\
+	- tour
+		- type: mongoose.Schema.ObjectId
+		- ref: 'Tour'
+		- require: [true, 'asdf']
+	- user
+		- type: mongoose.Schema.ObjectId
+		- ref: 'User'
+		- require: [true, 'asdf']
+	- price
+		- type: Number
+		- require: [true, 'asdf']
+	- createAt
+		- type: Date
+		- default: Date.now()
+	- paid
+		- type: Boolean
+		- default: true
+
+- create the model
+	- const Booking = mongoose.model('Booking', bookingSchema)
+- export it
+	- model.exports = Booking
+
+- we also want to populate the tour & user automatically when there is a query
+- using query middleware
+- bookingSchema.pre(/^find/, function(next) {})
+	- this.populate('user').populate({})
+		- path: 'tour'
+		- select: 'name'
