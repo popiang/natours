@@ -2494,8 +2494,32 @@ tourSchema.virtual('reviews', {
 - test it out and check both in stripe and mongodb..:)
 
 
+# 215 - Rendering A User's Booked Tours
 
+- first we add a new route in viewRoutes.js
+	- my-tours
+	- protect
+	- viewController.getMyTours
 
-
-
+- then in viewController
+	- require Booking model
+	- create getMyTours, catchAsync and async as usual
+	- first step
+		- find all bookings respective to the user id
+		- Booking.find({user: req.user.id})
+	- second step
+		- find all tours by the returned booking
+		- booking got tour id (tour)
+		- get all the tour id into an array
+			- bookings.map(el => el.tour)
+			- this will return an array of all the tour id
+			- assign to tourIDs
+		- then find all the tours using the array
+		- Tour.find({_id: {$in: tourIDs}})
+		- assign to tours variable
+		- we are using $in, just like in used in normal select query
+	- finally we render the result
+		- we will use 'overview' template
+		- but we send only the tours respective to the user
+* there's a bug. in the booking model, in the pre middleware, add next()
 		
