@@ -2522,4 +2522,20 @@ tourSchema.virtual('reviews', {
 		- we will use 'overview' template
 		- but we send only the tours respective to the user
 * there's a bug. in the booking model, in the pre middleware, add next()
-		
+
+# 216 - Finishing the Bookings API
+
+- now we just to finish creating all the crud operation for the bookings
+- in booking controller, using the factory, create:
+	- exports.createBooking = factory.createOne(Booking);
+	- exports.getBooking = factory.getOne(Booking);
+	- exports.getAllBooking = factory.getAll(Booking);
+	- exports.updateBooking = factory.updateOne(Booking);
+	- exports.deleteBooking = factory.deleteOne(Booking);
+
+- in bookingRoutes.js
+	- add router.use for protect at the top as all routers must be protected
+	- after getCheckoutSession, add restrict to admin and lead guide as all other routers can only be accessed by admin and lead-guides
+	- then add router for all the rest, seperated by without id parameters and with id parameters
+
+- test using postman
